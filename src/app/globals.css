@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tailwind theme tokens */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--text);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* -------------------------
+   Color tokens (single source of truth)
+   ------------------------- */
+:root {
+  /* LIGHT */
+  --canvas: #ffffff;              /* page background */
+  --text: #0f172a;                /* main text */
+  --muted: #475569;               /* secondary text */
+
+  /* Cards (light) */
+  --card-bg: #ffffff;
+  --card-fg: #0f172a;
+  --card-border: #e2e8f0;
+
+  /* Aliases used by Tailwind tokens */
+  --background: var(--canvas);
+  --foreground: var(--text);
+
+  /* Misc */
+  scrollbar-gutter: stable;
+}
+
+/* System color scheme hints */
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+/* DARK overrides */
+html.dark {
+  --canvas: #0d1b2a;              /* deep blue page background */
+  --text: #eef2f7;                /* main text on dark */
+  --muted: #c3d0e0;               /* secondary text on dark */
+
+  /* Cards (dark) – blue like Experiences */
+  --card-bg: #0d1b2a;
+  --card-fg: #eef2f7;
+  --card-border: #1b2a41;
+
+  /* Keep aliases in sync */
+  --background: var(--canvas);
+  --foreground: var(--text);
+}
+
+/* -------------------------
+   Base elements
+   ------------------------- */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Header = exactly the same background as the page */
+.site-header {
+  background: var(--background);
+}
+
+/* -------------------------
+   Card utility (shared look)
+   ------------------------- */
+.card {
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem; /* ~ rounded-2xl */
+}
+
+/* Propagate readable color inside cards */
+.card :where(h1,h2,h3,h4,h5,h6,p,span,small,strong,em,li,div) {
+  color: var(--card-fg);
+}
+
+/* -------------------------
+   Dark-mode readability helpers
+   ------------------------- */
+html.dark .bg-slate-50,
+html.dark .bg-slate-100,
+html.dark .bg-gray-50,
+html.dark .bg-gray-100 {
+  background-color: var(--card-bg) !important;
+}
+html.dark .text-slate-900,
+html.dark .text-gray-900 {
+  color: var(--card-fg) !important;
+}
+html.dark .text-slate-700,
+html.dark .text-gray-700 {
+  color: var(--muted) !important;
+}
+
+
+/* Navigation active tokens */
+:root {
+  --nav-active-bg: rgba(0,0,0,0.06);
+  --nav-active-ring: rgba(37, 99, 235, 0.25); /* #2563eb */
+}
+
+html.dark {
+  /* lighter blue than canvas (#0d1b2a) */
+  --nav-active-bg: color-mix(in oklab, var(--canvas) 55%, white 45%);
+  --nav-active-ring: color-mix(in oklab, #93c5fd 70%, transparent 30%); /* light ring */
+}
+
+/* Navigation active styles */
+.site-nav .nav-link[data-active="true"] {
+  background: var(--nav-active-bg);
+  box-shadow: 0 0 0 2px var(--nav-active-ring);
+  border-radius: 0.75rem; /* ~ rounded-xl */
+}
+
+/* Hover: leggero lift anche in dark */
+.site-nav .nav-link:hover {
+  background: color-mix(in oklab, var(--card-bg) 88%, white 12%);
+}
