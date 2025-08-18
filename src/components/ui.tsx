@@ -96,15 +96,13 @@ function NavLink({
     isActive: boolean;
     children: React.ReactNode;
 }) {
-    const base =
-        "nav-link cursor-pointer px-3 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60";
     return (
         <Link
             href={href}
             prefetch
             aria-current={isActive ? "page" : undefined}
             data-active={isActive ? "true" : "false"}
-            className={cx(base)}
+            className="nav-link btn-ghost px-3 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/60"
         >
             {children}
         </Link>
@@ -154,17 +152,16 @@ export function Header() {
 
                 <div className="flex items-center gap-2">
                     <button
-                        className="px-2.5 py-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-1 text-sm"
+                        className="btn-ghost inline-flex items-center gap-1 px-2.5 py-2 whitespace-nowrap"
                         onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
                         aria-label={t.nav.theme}
                         title={t.nav.theme}
-                        aria-pressed={theme === "dark"}
                         type="button"
                     >
                         <ThemeIcon className="h-5 w-5" />
                     </button>
                     <button
-                        className="px-2.5 py-2 rounded-xl hover:bg-black/5 dark:hover:bg:white/10 flex items-center gap-1 text-sm"
+                        className="btn-ghost inline-flex items-center gap-1 px-2.5 py-2 whitespace-nowrap"
                         onClick={() => setLang((l) => (l === "en" ? "it" : "en"))}
                         aria-label={t.nav.language}
                         title={t.nav.language}

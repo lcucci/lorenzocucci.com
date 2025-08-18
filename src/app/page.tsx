@@ -90,19 +90,19 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-3 gap-4">
             <Link
                 href="/experience"
-                className="cursor-pointer card p-4 flex items-center justify-center gap-2 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
+                className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
               <Briefcase className="h-4 w-4" /> {t.nav.experience}
             </Link>
             <Link
                 href="/projects"
-                className="cursor-pointer card p-4 flex items-center justify-center gap-2 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
+                className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
               <Code2 className="h-4 w-4" /> {t.nav.projects}
             </Link>
             <Link
                 href="/certifications"
-                className="cursor-pointer card p-4 flex items-center justify-center gap-2 text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10"
+                className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
               <Award className="h-4 w-4" /> {t.nav.certifications}
             </Link>
