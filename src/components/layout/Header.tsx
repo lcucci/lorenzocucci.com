@@ -8,7 +8,7 @@ import { DICT } from "@/lib/content";
 import { usePreferredTheme } from "@/components/hooks/usePreferredTheme";
 import { NavLink } from "@/components/ui/NavLink";
 import { HeaderLogo } from "@/components/ui/HeaderLogo";
-import {usePreferredLanguage} from "@/components/hooks/usePreferredLanguage";
+import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
 
 export function Header() {
     const { theme, setTheme } = usePreferredTheme();

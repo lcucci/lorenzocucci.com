@@ -5,10 +5,10 @@ import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
 import { DICT, CERTIFICATIONS } from "@/lib/content";
 import { Award, ExternalLink } from "lucide-react";
-import { useLang } from "@/lib/use-lang";
+import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
 
 export default function CertificationsPage() {
-    const { lang } = useLang();
+    const { lang } = usePreferredLanguage();
     const t = DICT[lang];
 
     return (

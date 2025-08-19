@@ -7,10 +7,10 @@ import { Github, Linkedin, Briefcase, Code2, Award } from "lucide-react";
 import SiteShell from "@/components/layout/SiteShell";
 import { Badge } from "@/components/ui";
 import { DICT, PROJECTS, CERTIFICATIONS, SKILLS, SkillKey } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
 
 export default function HomePage() {
-  const { lang } = useLang();
+  const { lang } = usePreferredLanguage();
   const t = DICT[lang];
 
   const metrics = [

@@ -5,10 +5,10 @@ import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
 import { DICT, EXPERIENCES } from "@/lib/content";
 import { Briefcase, ChevronDown } from "lucide-react";
-import { useLang } from "@/lib/use-lang";
+import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
 
 export default function ExperiencePage() {
-    const { lang } = useLang();
+    const { lang } = usePreferredLanguage();
     const t = DICT[lang];
 
     const [open, setOpen] = useState<boolean[]>(
