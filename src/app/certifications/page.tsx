@@ -14,10 +14,12 @@ export default function CertificationsPage() {
     return (
         <SiteShell>
             <SectionTitle icon={Award} title={t.certs.title} />
-            <div className="grid md:grid-cols-2 gap-4 mt-6">
+            <div className="space-y-4 mt-6">
                 {CERTIFICATIONS.map((c: any, idx: number) => {
-                    const vendor = typeof c.vendor === "string" ? c.vendor : (c.vendor?.[lang] ?? "");
-                    const period = typeof c.period === "string" ? c.period : (c.period?.[lang] ?? "");
+                    const vendor =
+                        typeof c.vendor === "string" ? c.vendor : (c.vendor?.[lang] ?? "");
+                    const period =
+                        typeof c.period === "string" ? c.period : (c.period?.[lang] ?? "");
                     const name = c.name?.[lang] ?? "";
                     const desc = c.description?.[lang] ?? "";
                     const skills: string[] = c.skills || [];
@@ -45,7 +47,9 @@ export default function CertificationsPage() {
                                 </div>
                             </div>
 
-                            {desc ? <p className="mt-3 text-sm md:text-base opacity-90">{desc}</p> : null}
+                            {desc ? (
+                                <p className="mt-3 text-sm md:text-base opacity-90">{desc}</p>
+                            ) : null}
 
                             {skills.length ? (
                                 <div className="mt-3 flex flex-wrap gap-2">

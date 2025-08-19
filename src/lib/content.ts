@@ -22,7 +22,7 @@ export const DICT = {
             linkedin: "LinkedIn",
         },
         experience: { title: "Professional Experience", now: "Present" },
-        projects: { title: "Personal Projects", view: "View", toolbelt: "Skills" },
+        projects: { title: "Personal Projects", view: "Code", toolbelt: "Skills" },
         certs: {
             title: "Certifications",
             view: "Credential",
@@ -67,7 +67,7 @@ export const DICT = {
             linkedin: "LinkedIn",
         },
         experience: { title: "Esperienza professionale", now: "Oggi" },
-        projects: { title: "Progetti personali", view: "Apri", toolbelt: "Competenze" },
+        projects: { title: "Progetti personali", view: "Codice", toolbelt: "Competenze" },
         certs: {
             title: "Certificazioni",
             view: "Credenziale",
@@ -210,6 +210,7 @@ export const PROJECTS = [
     {
         title: "TrovaBenzinaBot",
         logo: "https://raw.githubusercontent.com/lcucci/TrovaBenzinaBot/refs/heads/main/assets/images/botpic.png",
+        url: "https://t.me/TrovaBenzinaBot",
         description: {
             en: "Telegram bot that finds the cheapest fuel stations nearby with smart filtering and savings stats.",
             it: "Bot Telegram che trova i distributori più economici con filtri intelligenti e statistiche di risparmio.",
@@ -218,7 +219,7 @@ export const PROJECTS = [
         link: "https://github.com/lcucci/TrovaBenzinaBot",
     },
     {
-        title: "MoneyIsTime (Chrome Extension)",
+        title: "MoneyIsTime",
         logo: "https://github.com/lcucci/MoneyIsTime/blob/main/icons/icon-nobg.png?raw=true",
         description: {
             en: "Annotates prices on websites with the work time required to afford them, based on your salary.",
@@ -230,6 +231,7 @@ export const PROJECTS = [
     {
         title: "lorenzocucci.com",
         logo: "",
+        url: "https://lorenzocucci.com",
         description: {
             en: "TODO",
             it: "TODO",
