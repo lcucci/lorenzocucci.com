@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import SiteShell from "@/components/site-shell";
+import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
 import { DICT, PROJECTS } from "@/lib/content";
 import { Code2, ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/use-lang";
 
-type Lang = "it" | "en";
 
 export default function ProjectsPage() {
     const { lang } = useLang();

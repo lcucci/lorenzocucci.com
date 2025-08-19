@@ -1,13 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import SiteShell from "@/components/site-shell";
+import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
 import { DICT, EXPERIENCES } from "@/lib/content";
 import { Briefcase, ChevronDown } from "lucide-react";
 import { useLang } from "@/lib/use-lang";
-
-type Lang = "it" | "en";
 
 export default function ExperiencePage() {
     const { lang } = useLang();

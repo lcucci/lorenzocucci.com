@@ -1,13 +1,11 @@
 "use client";
 
 import React from "react";
-import SiteShell from "@/components/site-shell";
+import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
 import { DICT, CERTIFICATIONS } from "@/lib/content";
 import { Award, ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/use-lang";
-
-type Lang = "it" | "en";
 
 export default function CertificationsPage() {
     const { lang } = useLang();

@@ -1,10 +1,13 @@
 "use client";
 
 import React from "react";
-import { Header, Footer, usePreferredLanguage } from "@/components/ui";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
     const { lang } = usePreferredLanguage();
+
     return (
         <div className="min-h-[100vh] overflow-x-hidden">
             <Header />

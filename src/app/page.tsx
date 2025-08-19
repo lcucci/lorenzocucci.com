@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Github, Linkedin, Briefcase, Code2, Award } from "lucide-react";
-import SiteShell from "@/components/site-shell";
+import SiteShell from "@/components/layout/SiteShell";
 import { Badge } from "@/components/ui";
 import { DICT, PROJECTS, CERTIFICATIONS, SKILLS, SkillKey } from "@/lib/content";
 import { useLang } from "@/lib/use-lang";
