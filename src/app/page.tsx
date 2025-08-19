@@ -6,22 +6,30 @@ import Link from "next/link";
 import { Github, Linkedin, Briefcase, Code2, Award } from "lucide-react";
 import SiteShell from "@/components/layout/SiteShell";
 import { Badge } from "@/components/ui";
-import { DICT, PROJECTS, CERTIFICATIONS, SKILLS, SkillKey } from "@/lib/content";
+import { SITE, UI, PROJECTS, CERTIFICATIONS, SKILLS, tr } from "@/lib/content";
 import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
 
 export default function HomePage() {
   const { lang } = usePreferredLanguage();
-  const t = DICT[lang];
 
   const metrics = [
-    { label: lang === "it" ? "Anni di esperienza" : "Years of experience", value: `${yearsSince(new Date(2021, 8, 1))}+` },
-    { label: lang === "it" ? "Progetti personali" : "Personal projects", value: String(PROJECTS.length) },
-    { label: lang === "it" ? "Stack principali" : "Core stack", value: "Java • SQL" },
-    { label: lang === "it" ? "Certificazioni" : "Certifications", value: String(CERTIFICATIONS.length) },
+    {
+      label: lang === "it" ? "Anni di esperienza" : "Years of experience",
+      value: `${yearsSince(new Date(2021, 8, 1))}+`,
+    },
+    {
+      label: lang === "it" ? "Progetti personali" : "Personal projects",
+      value: String(PROJECTS.length),
+    },
+    {
+      label: lang === "it" ? "Stack principali" : "Core stack",
+      value: "Java • SQL",
+    },
+    {
+      label: lang === "it" ? "Certificazioni" : "Certifications",
+      value: String(CERTIFICATIONS.length),
+    },
   ];
-
-  const labels = t.skills.groups as Record<string, string>;
-  const entries = Object.entries(SKILLS) as unknown as [SkillKey, string[]][];
 
   return (
       <SiteShell>
@@ -33,9 +41,11 @@ export default function HomePage() {
         >
           <div className="grid md:grid-cols-3 gap-8 items-start">
             <div className="md:col-span-2">
-              <h1 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">{t.hero.intro}</h1>
-              <p className="mt-4 text-lg opacity-90">{t.site.tagline}</p>
-              <p className="mt-3 opacity-90 max-w-3xl">{t.hero.long}</p>
+              <h1 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
+                {tr(SITE.hero.intro, lang)}
+              </h1>
+              <p className="mt-4 text-lg opacity-90">{tr(SITE.tagline, lang)}</p>
+              <p className="mt-3 opacity-90 max-w-3xl">{tr(SITE.hero.long, lang)}</p>
             </div>
             <div className="space-y-4">
               <div className="flex gap-3 justify-center">
@@ -45,7 +55,8 @@ export default function HomePage() {
                     rel="noreferrer"
                     className="px-4 py-2.5 rounded-xl bg-[#181717] text-white font-medium hover:opacity-90 inline-flex items-center gap-2"
                 >
-                  <Github className="h-4 w-4" /> {t.hero.github}
+                  <Github className="h-4 w-4" />
+                  {tr(UI.social.github, lang)}
                 </a>
                 <a
                     href="https://www.linkedin.com/in/lorenzo-cucci/"
@@ -53,7 +64,8 @@ export default function HomePage() {
                     rel="noreferrer"
                     className="px-4 py-2.5 rounded-xl bg-[#0A66C2] text-white font-medium hover:opacity-90 inline-flex items-center gap-2"
                 >
-                  <Linkedin className="h-4 w-4" /> {t.hero.linkedin}
+                  <Linkedin className="h-4 w-4" />
+                  {tr(UI.social.linkedin, lang)}
                 </a>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -68,19 +80,22 @@ export default function HomePage() {
           </div>
 
           <div className="card p-4">
-            <div className="text-sm font-medium mb-3">{t.projects.toolbelt}</div>
+            <div className="text-sm font-medium mb-3">{tr(SITE.home.toolbelt, lang)}</div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {entries.map(([k, list]) => (
+              {SKILLS.map((group, idx) => (
                   <div
-                      key={k}
+                      key={idx}
                       className="rounded-2xl border border-[var(--card-border)] p-3"
                       style={{ background: "color-mix(in oklab, var(--card-bg) 92%, transparent)" }}
                   >
-                    <div className="text-xs font-medium mb-2 opacity-90">{labels[k]}</div>
+                    <div className="text-xs font-medium mb-2 opacity-90">
+                      {tr(group.group, lang)}
+                    </div>
                     <div className="flex flex-wrap gap-2">
-                      {list.map((s) => (
-                          <Badge key={s}>{s}</Badge>
-                      ))}
+                      {group.items.map((s, i) => {
+                        const label = typeof s === "string" ? s : tr(s, lang);
+                        return <Badge key={`${label}-${i}`}>{label}</Badge>;
+                      })}
                     </div>
                   </div>
               ))}
@@ -92,19 +107,19 @@ export default function HomePage() {
                 href="/experience"
                 className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
-              <Briefcase className="h-4 w-4" /> {t.nav.experience}
+              <Briefcase className="h-4 w-4" /> {tr(UI.nav.experience, lang)}
             </Link>
             <Link
                 href="/projects"
                 className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
-              <Code2 className="h-4 w-4" /> {t.nav.projects}
+              <Code2 className="h-4 w-4" /> {tr(UI.nav.projects, lang)}
             </Link>
             <Link
                 href="/certifications"
                 className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
-              <Award className="h-4 w-4" /> {t.nav.certifications}
+              <Award className="h-4 w-4" /> {tr(UI.nav.certifications, lang)}
             </Link>
           </div>
         </motion.section>

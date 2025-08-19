@@ -3,20 +3,17 @@
 import React, { useState } from "react";
 import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
-import { DICT, EXPERIENCES } from "@/lib/content";
+import { SITE, EXPERIENCES, tr, trList, UI } from "@/lib/content";
 import { Briefcase, ChevronDown } from "lucide-react";
 import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
 
 export default function ExperiencePage() {
     const { lang } = usePreferredLanguage();
-    const t = DICT[lang];
 
-    const [open, setOpen] = useState<boolean[]>(
-        () => EXPERIENCES.map((_, i) => i === 0)
-    );
+    const [open, setOpen] = useState<boolean[]>(() => EXPERIENCES.map((_, i) => i === 0));
 
     const toggle = (idx: number) =>
-        setOpen((prev) => {
+        setOpen(prev => {
             const next = [...prev];
             next[idx] = !next[idx];
             return next;
@@ -31,12 +28,13 @@ export default function ExperiencePage() {
 
     return (
         <SiteShell>
-            <SectionTitle icon={Briefcase} title={t.experience.title} />
+            <SectionTitle icon={Briefcase} title={tr(SITE.sections.experience, lang)} />
             <div className="space-y-4 mt-6">
-                {EXPERIENCES.map((exp: any, idx: number) => {
-                    const period =
-                        typeof exp.period === "string" ? exp.period : (exp.period?.[lang] ?? "");
-                    const location = exp.location?.[lang] ?? "";
+                {EXPERIENCES.map((exp, idx) => {
+                    const company = tr(exp.company, lang);
+                    const role = tr(exp.role, lang);
+                    const location = tr(exp.location, lang);
+                    const period = typeof (exp as any).period === "string" ? (exp as any).period : tr(exp.period as any, lang);
                     const isOpen = open[idx];
 
                     const CompanyWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
@@ -56,7 +54,6 @@ export default function ExperiencePage() {
 
                     return (
                         <div key={idx} className="relative card p-4">
-                            {/* HEADER INTERO CLICCABILE */}
                             <div
                                 role="button"
                                 tabIndex={0}
@@ -65,21 +62,19 @@ export default function ExperiencePage() {
                                 onClick={() => toggle(idx)}
                                 onKeyDown={(e) => onHeaderKey(idx, e)}
                                 className="flex items-start justify-between gap-3 pr-10 cursor-pointer select-none group"
-                                title={isOpen ? t.ui.collapse : t.ui.expand}
+                                title={isOpen ? tr(UI.ui.collapse, lang) : tr(UI.ui.expand, lang)}
                             >
                                 <div className="flex items-center gap-3">
                                     <CompanyWrapper>
-                                        <BrandLogo src={exp.companyLogo} label={exp.company?.[lang] ?? ""} />
+                                        <BrandLogo src={exp.companyLogo} label={company} />
                                     </CompanyWrapper>
                                     <div className="min-w-0">
                                         <CompanyWrapper>
                                             <div className="font-semibold text-base md:text-lg leading-tight truncate">
-                                                {exp.company?.[lang] ?? ""}
+                                                {company}
                                             </div>
                                         </CompanyWrapper>
-                                        <div className="text-sm text-[var(--muted)]">
-                                            {exp.role?.[lang] ?? ""}
-                                        </div>
+                                        <div className="text-sm text-[var(--muted)]">{role}</div>
                                     </div>
                                 </div>
 
@@ -89,42 +84,48 @@ export default function ExperiencePage() {
                                 </div>
 
                                 <ChevronDown
-                                    className={`absolute right-2 top-2 h-5 w-5 transition-transform group-hover:scale-110 ${isOpen ? "rotate-180" : ""}`}
+                                    className={`absolute right-2 top-2 h-5 w-5 transition-transform group-hover:scale-110 ${
+                                        isOpen ? "rotate-180" : ""
+                                    }`}
                                 />
                             </div>
 
                             <div
                                 id={`exp-${idx}-content`}
-                                className={`mt-4 grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                                className={`mt-4 grid transition-all duration-300 ease-in-out ${
+                                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                                }`}
                             >
                                 <div className="min-h-0 overflow-hidden">
                                     {Array.isArray(exp.projects) && exp.projects.length > 0 ? (
                                         <div className="space-y-4">
-                                            {exp.projects.map((p: any, pi: number) => (
-                                                <div
-                                                    key={pi}
-                                                    className="rounded-xl border border-[var(--card-border)] p-3"
-                                                    style={{ background: "color-mix(in oklab, var(--card-bg) 92%, transparent)" }}
-                                                >
-                                                    <div className="font-medium">
-                                                        {p.name?.[lang] ?? ""}
+                                            {exp.projects.map((p, pi) => {
+                                                const projName = tr(p.name, lang);
+                                                const bullets = p.bullets ? trList(p.bullets, lang) : [];
+                                                return (
+                                                    <div
+                                                        key={pi}
+                                                        className="rounded-xl border border-[var(--card-border)] p-3"
+                                                        style={{ background: "color-mix(in oklab, var(--card-bg) 92%, transparent)" }}
+                                                    >
+                                                        <div className="font-medium">{projName}</div>
+                                                        {bullets.length ? (
+                                                            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base mt-2 text-[var(--muted)]">
+                                                                {bullets.map((b, bi) => (
+                                                                    <li key={bi}>{b}</li>
+                                                                ))}
+                                                            </ul>
+                                                        ) : null}
+                                                        {p.stack?.length ? (
+                                                            <div className="mt-3 flex flex-wrap gap-2">
+                                                                {p.stack.map((s) => (
+                                                                    <Badge key={s}>{s}</Badge>
+                                                                ))}
+                                                            </div>
+                                                        ) : null}
                                                     </div>
-                                                    {p.bullets?.[lang]?.length ? (
-                                                        <ul className="list-disc pl-5 space-y-1 text-sm md:text-base mt-2 text-[var(--muted)]">
-                                                            {p.bullets[lang].map((b: string, bi: number) => (
-                                                                <li key={bi}>{b}</li>
-                                                            ))}
-                                                        </ul>
-                                                    ) : null}
-                                                    {p.stack?.length ? (
-                                                        <div className="mt-3 flex flex-wrap gap-2">
-                                                            {p.stack.map((s: string) => (
-                                                                <Badge key={s}>{s}</Badge>
-                                                            ))}
-                                                        </div>
-                                                    ) : null}
-                                                </div>
-                                            ))}
+                                                );
+                                            })}
                                         </div>
                                     ) : null}
                                 </div>
