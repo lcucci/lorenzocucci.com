@@ -3,17 +3,17 @@
 import React, { useState } from "react";
 import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
-import { SITE, EXPERIENCES, tr, trList, UI } from "@/lib/content";
+import { SITE, EXPERIENCES, tr, UI } from "@/lib/content";
 import { Briefcase, ChevronDown } from "lucide-react";
 import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
+import Markdown from "@/components/utils/Markdown";
 
 export default function ExperiencePage() {
     const { lang } = usePreferredLanguage();
-
     const [open, setOpen] = useState<boolean[]>(() => EXPERIENCES.map((_, i) => i === 0));
 
     const toggle = (idx: number) =>
-        setOpen(prev => {
+        setOpen((prev) => {
             const next = [...prev];
             next[idx] = !next[idx];
             return next;
@@ -70,9 +70,7 @@ export default function ExperiencePage() {
                                     </CompanyWrapper>
                                     <div className="min-w-0">
                                         <CompanyWrapper>
-                                            <div className="font-semibold text-base md:text-lg leading-tight truncate">
-                                                {company}
-                                            </div>
+                                            <div className="font-semibold text-base md:text-lg leading-tight truncate">{company}</div>
                                         </CompanyWrapper>
                                         <div className="text-sm text-[var(--muted)]">{role}</div>
                                     </div>
@@ -100,25 +98,20 @@ export default function ExperiencePage() {
                                     {Array.isArray(exp.projects) && exp.projects.length > 0 ? (
                                         <div className="space-y-4">
                                             {exp.projects.map((p, pi) => {
-                                                const projName = tr(p.name, lang);
-                                                const bullets = p.bullets ? trList(p.bullets, lang) : [];
+                                                const projDesc = tr(p.description, lang);
                                                 return (
                                                     <div
                                                         key={pi}
                                                         className="rounded-xl border border-[var(--card-border)] p-3"
                                                         style={{ background: "color-mix(in oklab, var(--card-bg) 92%, transparent)" }}
                                                     >
-                                                        <div className="font-medium">{projName}</div>
-                                                        {bullets.length ? (
-                                                            <ul className="list-disc pl-5 space-y-1 text-sm md:text-base mt-2 text-[var(--muted)]">
-                                                                {bullets.map((b, bi) => (
-                                                                    <li key={bi}>{b}</li>
-                                                                ))}
-                                                            </ul>
+                                                        {projDesc ? (
+                                                            <Markdown className="text-sm md:text-base opacity-90">{projDesc}</Markdown>
                                                         ) : null}
+
                                                         {p.stack?.length ? (
                                                             <div className="mt-3 flex flex-wrap gap-2">
-                                                                {p.stack.map((s) => (
+                                                                {p.stack.map((s: string) => (
                                                                     <Badge key={s}>{s}</Badge>
                                                                 ))}
                                                             </div>
