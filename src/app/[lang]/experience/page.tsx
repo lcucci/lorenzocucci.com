@@ -2,15 +2,16 @@
 
 import React, { useState } from "react";
 import SiteShell from "@/components/layout/SiteShell";
-import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
+import { SectionTitle, BrandLogo } from "@/components/ui";
 import { SITE, EXPERIENCES, tr, UI } from "@/lib/content";
 import { Briefcase, ChevronDown } from "lucide-react";
-import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
+import { usePreferredLanguage, buildSkillAccentMap } from "@/components";
 import Markdown from "@/components/utils/Markdown";
 
 export default function ExperiencePage() {
     const { lang } = usePreferredLanguage();
     const [open, setOpen] = useState<boolean[]>(() => EXPERIENCES.map((_, i) => i === 0));
+    const accentMap = React.useMemo(() => buildSkillAccentMap(lang as "it" | "en"), [lang]);
 
     const toggle = (idx: number) =>
         setOpen((prev) => {
@@ -34,7 +35,8 @@ export default function ExperiencePage() {
                     const company = tr(exp.company, lang);
                     const role = tr(exp.role, lang);
                     const location = tr(exp.location, lang);
-                    const period = typeof (exp as any).period === "string" ? (exp as any).period : tr(exp.period as any, lang);
+                    const period =
+                        typeof (exp as any).period === "string" ? (exp as any).period : tr(exp.period as any, lang);
                     const isOpen = open[idx];
 
                     const CompanyWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
@@ -103,7 +105,9 @@ export default function ExperiencePage() {
                                                     <div
                                                         key={pi}
                                                         className="rounded-xl border border-[var(--card-border)] p-3"
-                                                        style={{ background: "color-mix(in oklab, var(--card-bg) 92%, transparent)" }}
+                                                        style={{
+                                                            background: "color-mix(in oklab, var(--card-bg) 92%, transparent)",
+                                                        }}
                                                     >
                                                         {projDesc ? (
                                                             <Markdown className="text-sm md:text-base opacity-90">{projDesc}</Markdown>
@@ -111,9 +115,18 @@ export default function ExperiencePage() {
 
                                                         {p.skills?.length ? (
                                                             <div className="mt-3 flex flex-wrap gap-2">
-                                                                {p.skills.map((s: string) => (
-                                                                    <Badge key={s}>{s}</Badge>
-                                                                ))}
+                                                                {p.skills.map((s: string) => {
+                                                                    const accent = accentMap[s];
+                                                                    return (
+                                                                        <span
+                                                                            key={s}
+                                                                            className="skill-chip"
+                                                                            style={{ ["--skill-accent" as any]: accent }}
+                                                                        >
+                                                                        {s}
+                                                                        </span>
+                                                                    );
+                                                                })}
                                                             </div>
                                                         ) : null}
                                                     </div>

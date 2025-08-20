@@ -1,3 +1,4 @@
+// app/(home)/page.tsx
 "use client";
 
 import React from "react";
@@ -81,31 +82,44 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Skills */}
           <div className="card p-4">
-            <div className="text-sm font-bold mb-3">{tr(SITE.home.toolbelt, lang)}</div>
+            <div className="text-sm font-bold mb-3">
+              {tr(SITE.home.toolbelt, lang)}
+            </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {SKILLS.map((group, idx) => (
-                  <div
-                      key={idx}
-                      className="rounded-2xl border border-[var(--card-border)] p-3"
-                      style={{ background: "color-mix(in oklab, var(--card-bg) 92%, transparent)" }}
-                  >
-                    <div className="text-xs font-bold mb-2 opacity-90">
-                      {tr(group.group, lang)}
+              {SKILLS.map((group, idx) => {
+                const accent =
+                    group.accent ??
+                    ["oklch(72% 0.18 45)","oklch(70% 0.17 145)","oklch(69% 0.16 200)",
+                      "oklch(67% 0.16 255)","oklch(66% 0.16 300)","oklch(71% 0.17 20)"][idx % 6];
+
+                return (
+                    <div
+                        key={idx}
+                        className="rounded-2xl border border-[var(--card-border)] p-3"
+                        style={{
+                          ["--skill-accent" as any]: accent,
+                          background: "color-mix(in oklab, var(--card-bg) 92%, transparent)",
+                        }}
+                    >
+                      <div className="text-xs font-bold mb-2 opacity-90">
+                        {tr(group.group, lang)}
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {group.items.map((s, i) => {
+                          const label = typeof s === "string" ? s : tr(s, lang);
+                          const strong = !!group.highlight?.includes(label);
+                          return (
+                              <span key={`${label}-${i}`} className="skill-chip">
+                <span className={strong ? "font-semibold" : undefined}>{label}</span>
+              </span>
+                          );
+                        })}
+                      </div>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {group.items.map((s, i) => {
-                        const label = typeof s === "string" ? s : tr(s, lang);
-                        const isStrong = !!group.highlight?.includes(label);
-                        return (
-                            <Badge key={`${label}-${i}`}>
-                              <span className={isStrong ? "font-semibold" : undefined}>{label}</span>
-                            </Badge>
-                        );
-                      })}
-                    </div>
-                  </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

@@ -2,13 +2,14 @@
 
 import React from "react";
 import SiteShell from "@/components/layout/SiteShell";
-import { SectionTitle, Badge, BrandLogo, usePreferredLanguage } from "@/components";
+import { SectionTitle, BrandLogo, usePreferredLanguage, buildSkillAccentMap } from "@/components";
 import { SITE, CERTIFICATIONS, tr, UI } from "@/lib/content";
 import { Award, ExternalLink } from "lucide-react";
 import Markdown from "@/components/utils/Markdown";
 
 export default function CertificationsPage() {
     const { lang } = usePreferredLanguage();
+    const accentMap = React.useMemo(() => buildSkillAccentMap(lang as "it" | "en"), [lang]);
 
     return (
         <SiteShell>
@@ -68,16 +69,23 @@ export default function CertificationsPage() {
                             </LinkWrap>
 
                             {desc ? (
-                                <Markdown className="mt-3 text-sm md:text-base opacity-90">
-                                    {desc}
-                                </Markdown>
+                                <Markdown className="mt-3 text-sm md:text-base opacity-90">{desc}</Markdown>
                             ) : null}
 
                             {skills.length ? (
                                 <div className="mt-3 flex flex-wrap gap-2">
-                                    {skills.map((s) => (
-                                        <Badge key={s}>{s}</Badge>
-                                    ))}
+                                    {skills.map((s) => {
+                                        const accent = accentMap[s];
+                                        return (
+                                            <span
+                                                key={s}
+                                                className="skill-chip"
+                                                style={{ ["--skill-accent" as any]: accent }}
+                                            >
+                        {s}
+                      </span>
+                                        );
+                                    })}
                                 </div>
                             ) : null}
                         </div>

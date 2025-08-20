@@ -160,3 +160,28 @@ html.dark .text-slate-700,
 html.dark .text-gray-700 {
   color: var(--muted) !important;
 }
+
+:root {
+  /* default per evitare warning “Cannot resolve” e avere un fallback */
+  --skill-accent: oklch(68% 0.16 255);
+}
+
+/* Chip per le skill, colorato dal gruppo via --skill-accent */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--skill-accent) 50%, var(--card-border) 50%);
+  background: color-mix(in oklab, var(--skill-accent) 14%, var(--card-bg) 86%);
+  transition: background .2s ease, border-color .2s ease, transform .15s ease;
+}
+
+.skill-chip:hover {
+  background: color-mix(in oklab, var(--skill-accent) 20%, var(--card-bg) 80%);
+}
+
+.skill-chip:active {
+  transform: translateY(0.5px);
+}

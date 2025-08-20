@@ -2,14 +2,15 @@
 
 import React from "react";
 import SiteShell from "@/components/layout/SiteShell";
-import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
-import { SITE, PROJECTS, tr, UI } from "@/lib/content";
+import { SectionTitle, BrandLogo } from "@/components/ui";
+import {SITE, PROJECTS, tr, UI} from "@/lib/content";
 import { Code2, ExternalLink } from "lucide-react";
-import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
+import { usePreferredLanguage, buildSkillAccentMap } from "@/components";
 import Markdown from "@/components/utils/Markdown";
 
 export default function ProjectsPage() {
     const { lang } = usePreferredLanguage();
+    const accentMap = React.useMemo(() => buildSkillAccentMap(lang as "it" | "en"), [lang]);
 
     return (
         <SiteShell>
@@ -68,9 +69,18 @@ export default function ProjectsPage() {
 
                             {Array.isArray(p.skills) && p.skills.length ? (
                                 <div className="mt-3 flex flex-wrap gap-2">
-                                    {p.skills.map((tag) => (
-                                        <Badge key={tag}>{tag}</Badge>
-                                    ))}
+                                    {p.skills.map((tag: string) => {
+                                        const accent = accentMap[tag];
+                                        return (
+                                            <span
+                                                key={tag}
+                                                className="skill-chip"
+                                                style={{ ["--skill-accent" as any]: accent }}
+                                            >
+                        {tag}
+                      </span>
+                                        );
+                                    })}
                                 </div>
                             ) : null}
                         </div>
