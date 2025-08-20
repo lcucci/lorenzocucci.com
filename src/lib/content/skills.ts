@@ -15,7 +15,7 @@ export const SKILLS: Skill[] = [
     },
     {
         group: {en: "DevOps", it: "DevOps"},
-        items: ["Git", "RTC", "Maven", "Jenkins", "Jboss", "Google Cloud Platform"]
+        items: ["Git", "RTC", "Maven", "Jenkins", "JBoss", "Google Cloud Platform"]
     },
     {
         group: {en: "Tools", it: "Strumenti"},
