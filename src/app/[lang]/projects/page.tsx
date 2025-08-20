@@ -6,6 +6,7 @@ import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
 import { SITE, PROJECTS, tr, UI } from "@/lib/content";
 import { Code2, ExternalLink } from "lucide-react";
 import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
+import Markdown from "@/components/utils/Markdown";
 
 export default function ProjectsPage() {
     const { lang } = usePreferredLanguage();
@@ -19,7 +20,6 @@ export default function ProjectsPage() {
                     const desc = p.description ? tr(p.description, lang) : "";
                     const url = p.url;
                     const codeUrl = p.codeUrl;
-                    const href = p.url;
 
                     const LinkWrap: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                         url ? (
@@ -62,7 +62,9 @@ export default function ProjectsPage() {
                                 </div>
                             </LinkWrap>
 
-                            {desc ? <p className="mt-3 text-sm md:text-base opacity-90">{desc}</p> : null}
+                            <Markdown className="mt-3 text-sm md:text-base opacity-90">
+                                {desc}
+                            </Markdown>
 
                             {Array.isArray(p.skills) && p.skills.length ? (
                                 <div className="mt-3 flex flex-wrap gap-2">

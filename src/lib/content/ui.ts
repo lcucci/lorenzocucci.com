@@ -12,7 +12,7 @@ export const UI = {
     },
     actions: {
         viewCredential: { en: "Credential", it: "Credenziale" } as MLString,
-        viewCode: { en: "Code", it: "Code" } as MLString,
+        viewCode: { en: "Code", it: "Codice" } as MLString,
     },
     ui: {
         expand: { en: "Expand", it: "Espandi" } as MLString,
