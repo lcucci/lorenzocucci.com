@@ -7,8 +7,8 @@ export const CERTIFICATIONS: Certification[] = [
         logo: "https://images.credly.com/images/2ab3ddc1-1867-40f2-94f7-09fd4037c93d/image.png",
         url: "https://cloud.google.com/certification/cloud-digital-leader",
         period: {
-            en: "2024",
-            it: "2024"
+            en: "12/2022 - 12/2025",
+            it: "12/2022 - 12/2025"
         },
         description: {
             en: "A **Cloud Digital Leader** is able to explain the capabilities of *Google Cloud*’s core products and services and the benefits they provide to organizations. They can also describe **common business use cases** and how cloud solutions support a company.\n" +
