@@ -104,18 +104,4 @@ export const PROJECTS: Project[] = [
         skills: ["JavaScript", "HTML", "CSS"],
         codeUrl: "https://github.com/lcucci/MoneyIsTime",
     },
-    {
-        name: {
-            en: "lorenzocucci.com",
-            it: "lorenzocucci.com"
-        },
-        logo: "",
-        url: "https://lorenzocucci.com",
-        description: {
-            en: "TODO",
-            it: "TODO",
-        },
-        skills: ["TODO"],
-        codeUrl: "https://github.com/lcucci/lorenzocucci.com",
-    },
 ];
