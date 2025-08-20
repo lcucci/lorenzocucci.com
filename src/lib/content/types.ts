@@ -14,8 +14,7 @@ export const trList = (s: MLStringList, lang: Lang): string[] => s?.[lang] ?? []
 
 
 export interface ExperienceProject {
-    name: MLString;
-    bullets?: MLStringList;
+    description: MLString;
     stack?: string[];
 }
 
