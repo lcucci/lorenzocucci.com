@@ -109,9 +109,9 @@ export default function ExperiencePage() {
                                                             <Markdown className="text-sm md:text-base opacity-90">{projDesc}</Markdown>
                                                         ) : null}
 
-                                                        {p.stack?.length ? (
+                                                        {p.skills?.length ? (
                                                             <div className="mt-3 flex flex-wrap gap-2">
-                                                                {p.stack.map((s: string) => (
+                                                                {p.skills.map((s: string) => (
                                                                     <Badge key={s}>{s}</Badge>
                                                                 ))}
                                                             </div>

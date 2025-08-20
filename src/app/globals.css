@@ -21,7 +21,7 @@
   /* Cards (light) */
   --card-bg: #ffffff;
   --card-fg: #0f172a;
-  --card-border: #e2e8f0;
+  --card-border: #0f172a;
 
   /* Nav + hover (light) */
   --nav-active-bg: rgba(0, 0, 0, 0.06);
@@ -48,7 +48,7 @@ html.dark {
   /* Cards (dark) */
   --card-bg: #0d1b2a;              /* same hue for seamless look */
   --card-fg: #eef2f7;
-  --card-border: #1b2a41;
+  --card-border: #f1f5f9;
 
   /* Nav + hover (dark) */
   --nav-active-bg: color-mix(in oklab, var(--canvas) 55%, white 45%);

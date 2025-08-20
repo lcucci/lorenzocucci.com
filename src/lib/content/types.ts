@@ -15,7 +15,7 @@ export const trList = (s: MLStringList, lang: Lang): string[] => s?.[lang] ?? []
 
 export interface ExperienceProject {
     description: MLString;
-    stack?: string[];
+    skills?: string[];
 }
 
 export interface Experience {
@@ -51,4 +51,6 @@ export interface Certification {
 export interface Skill {
     group: MLString;
     items: Array<MLString | string>;
+    highlight?: string[];
+    accent?: string;
 }
