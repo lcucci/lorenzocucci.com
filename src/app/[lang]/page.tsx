@@ -7,6 +7,7 @@ import { Github, Linkedin, Briefcase, Code2, Award } from "lucide-react";
 import SiteShell from "@/components/layout/SiteShell";
 import { SITE, UI, PROJECTS, CERTIFICATIONS, SKILLS, tr } from "@/lib/content";
 import { Badge, usePreferredLanguage, useLocaleHref } from "@/components";
+import Markdown from "@/components/utils/Markdown";
 
 export default function HomePage() {
   const { lang } = usePreferredLanguage();
@@ -44,8 +45,9 @@ export default function HomePage() {
               <h1 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
                 {tr(SITE.hero.intro, lang)}
               </h1>
-              <p className="mt-4 text-lg opacity-90">{tr(SITE.tagline, lang)}</p>
-              <p className="mt-3 opacity-90 max-w-3xl">{tr(SITE.hero.long, lang)}</p>
+              <Markdown className="mt-3 opacity-90 max-w-3xl">
+                {tr(SITE.hero.long, lang)}
+              </Markdown>
             </div>
             <div className="space-y-4">
               <div className="flex gap-3 justify-center">
