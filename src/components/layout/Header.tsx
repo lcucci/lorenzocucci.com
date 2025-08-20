@@ -5,15 +5,14 @@ import { Globe2, Moon, Sun, Home as HomeIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE, UI, tr } from "@/lib/content";
-import { usePreferredTheme } from "@/components/hooks/usePreferredTheme";
-import { NavLink } from "@/components/ui/NavLink";
-import { HeaderLogo } from "@/components/ui/HeaderLogo";
-import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
+import { NavLink, HeaderLogo, usePreferredTheme, usePreferredLanguage, useLocaleHref} from "@/components";
 
 export function Header() {
     const { theme, setTheme } = usePreferredTheme();
     const { lang, setLang } = usePreferredLanguage();
     const ThemeIcon = useMemo(() => (theme === "dark" ? Moon : Sun), [theme]);
+    const norm = (s: string) => s.replace(/\/+$/, "");
+    const href = useLocaleHref();
 
     const pathname = usePathname() || "/";
     const current = (pathname.replace(/\/+$/, "") || "/") as
@@ -26,7 +25,7 @@ export function Header() {
         <header className="site-header sticky top-0 z-40 border-b border-slate-200/60 dark:border-slate-800">
             <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <Link href="/" aria-label="Home" className="inline-flex">
+                    <Link href={href("/")} aria-label="Home" className="inline-flex">
                         <HeaderLogo />
                     </Link>
                     <div className="leading-tight">
@@ -36,17 +35,17 @@ export function Header() {
                 </div>
 
                 <nav className="site-nav hidden md:flex items-center gap-2">
-                    <NavLink href="/" isActive={current === "/"}>
+                    <NavLink href={href("/")} isActive={pathname === norm(href("/"))}>
                         <HomeIcon className="h-4 w-4" aria-hidden="true" />
                         <span className="sr-only">{tr(UI.nav.home, lang)}</span>
                     </NavLink>
-                    <NavLink href="/experience" isActive={current === "/experience"}>
+                    <NavLink href={href("/experience")} isActive={current === norm(href("/experience"))}>
                         {tr(UI.nav.experience, lang)}
                     </NavLink>
-                    <NavLink href="/projects" isActive={current === "/projects"}>
+                    <NavLink href={href("/projects")} isActive={current === norm(href("/projects"))}>
                         {tr(UI.nav.projects, lang)}
                     </NavLink>
-                    <NavLink href="/certifications" isActive={current === "/certifications"}>
+                    <NavLink href={href("/certifications")} isActive={current === norm(href("/certifications"))}>
                         {tr(UI.nav.certifications, lang)}
                     </NavLink>
                 </nav>

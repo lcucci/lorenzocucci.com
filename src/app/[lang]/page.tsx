@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Github, Linkedin, Briefcase, Code2, Award } from "lucide-react";
 import SiteShell from "@/components/layout/SiteShell";
-import { Badge } from "@/components/ui";
 import { SITE, UI, PROJECTS, CERTIFICATIONS, SKILLS, tr } from "@/lib/content";
-import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
+import { Badge, usePreferredLanguage, useLocaleHref } from "@/components";
 
 export default function HomePage() {
   const { lang } = usePreferredLanguage();
+  const href = useLocaleHref();
 
   const metrics = [
     {
@@ -104,19 +104,19 @@ export default function HomePage() {
 
           <div className="grid sm:grid-cols-3 gap-4">
             <Link
-                href="/experience"
+                href={href("/experience")}
                 className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
               <Briefcase className="h-4 w-4" /> {tr(UI.nav.experience, lang)}
             </Link>
             <Link
-                href="/projects"
+                href={href("/projects")}
                 className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
               <Code2 className="h-4 w-4" /> {tr(UI.nav.projects, lang)}
             </Link>
             <Link
-                href="/certifications"
+                href={href("/certifications")}
                 className="cursor-pointer card card-action p-4 flex items-center justify-center gap-2 text-sm font-medium"
             >
               <Award className="h-4 w-4" /> {tr(UI.nav.certifications, lang)}

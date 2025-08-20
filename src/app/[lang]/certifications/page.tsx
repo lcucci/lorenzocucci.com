@@ -2,10 +2,9 @@
 
 import React from "react";
 import SiteShell from "@/components/layout/SiteShell";
-import { SectionTitle, Badge, BrandLogo } from "@/components/ui";
+import { SectionTitle, Badge, BrandLogo, usePreferredLanguage } from "@/components";
 import { SITE, CERTIFICATIONS, tr, UI } from "@/lib/content";
 import { Award, ExternalLink } from "lucide-react";
-import { usePreferredLanguage } from "@/components/hooks/usePreferredLanguage";
 
 export default function CertificationsPage() {
     const { lang } = usePreferredLanguage();

@@ -1,66 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { useCallback } from "react";
+import type { Lang } from "@/lib/content";
 
-export type Lang = "it" | "en";
+const LOCALES: Lang[] = ["it", "en"];
 
-/** Reactive language hook synced with <html lang> and localStorage("lang"). */
-export function usePreferredLanguage(): { lang: Lang; setLang: (next: Lang | ((prev: Lang) => Lang)) => void } {
-    const read = (): Lang => {
-        if (typeof document === "undefined") return "it";
-        const fromHtml = (document.documentElement.lang as Lang) || null;
-        const fromStorage = (window.localStorage.getItem("lang") as Lang) || null;
-        return (fromHtml || fromStorage || "it") as Lang;
-    };
+export function usePreferredLanguage() {
+    const params = useParams<{ lang?: string }>();
+    const pathname = usePathname();
+    const router = useRouter();
 
-    const [lang, setLangState] = useState<Lang>(read());
+    const lang = (LOCALES.includes(params?.lang as Lang) ? (params!.lang as Lang) : "it");
 
-    // Write-through setter: updates state, <html lang>, and localStorage.
-    const setLang = (next: Lang | ((prev: Lang) => Lang)) => {
-        const value = typeof next === "function" ? (next as (prev: Lang) => Lang)(lang) : next;
-        if (value !== "en" && value !== "it") return;
-        setLangState(value);
-        if (typeof document !== "undefined") {
-            document.documentElement.lang = value;
-        }
-        try {
-            window.localStorage.setItem("lang", value);
-        } catch {
-            /* ignore storage failures */
-        }
-    };
-
-    useEffect(() => {
-        if (typeof document === "undefined") return;
-
-        // Keep state in sync if something else changes <html lang>.
-        const observer = new MutationObserver(() => {
-            const htmlLang = (document.documentElement.lang as Lang) || null;
-            if (htmlLang === "en" || htmlLang === "it") {
-                setLangState((cur) => (cur === htmlLang ? cur : htmlLang));
-            }
-        });
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["lang"],
-        });
-
-        // Keep state in sync if localStorage changes in other tabs.
-        const onStorage = (e: StorageEvent) => {
-            if (e.key === "lang") {
-                const v = (e.newValue as Lang) || null;
-                if (v === "en" || v === "it") {
-                    setLangState((cur) => (cur === v ? cur : v));
-                }
-            }
-        };
-        window.addEventListener("storage", onStorage);
-
-        return () => {
-            observer.disconnect();
-            window.removeEventListener("storage", onStorage);
-        };
-    }, []);
+    const setLang = useCallback(
+        (next: Lang | ((l: Lang) => Lang)) => {
+            const resolved = typeof next === "function" ? (next as (l: Lang) => Lang)(lang) : next;
+            const withPrefix = pathname.replace(/^\/(it|en)(?=\/|$)/, `/${resolved}`);
+            document.cookie = `lang=${resolved}; path=/; max-age=31536000; samesite=lax`;
+            router.replace(withPrefix);
+        },
+        [lang, pathname, router]
+    );
 
     return { lang, setLang };
 }

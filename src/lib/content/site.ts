@@ -27,6 +27,6 @@ export const SITE = {
         skills: { en: "Skills", it: "Competenze" } as MLString,
     },
     home: {
-        toolbelt: { en: "Toolbelt", it: "Toolbelt" } as MLString,
+        toolbelt: { en: "Skills", it: "Competenze" } as MLString,
     },
 } as const;

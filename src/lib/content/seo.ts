@@ -1,11 +1,11 @@
-import type { MLString } from "./types";
+// lib/content/seo.ts
+import type { Metadata } from "next";
+import type { MLString, Lang } from "./types";
 
-type PageSeo = {
-    title: MLString;
-    description: MLString;
-};
+type PageSeo = { title: MLString; description: MLString };
+export type PageKey = "home" | "experience" | "projects" | "certifications" | "skills";
 
-export const SEO: Record<string, PageSeo> = {
+export const SEO: Record<PageKey, PageSeo> = {
     home: {
         title: { en: "Lorenzo Cucci — Portfolio", it: "Lorenzo Cucci — Portfolio" },
         description: {
@@ -42,3 +42,18 @@ export const SEO: Record<string, PageSeo> = {
         },
     },
 } as const;
+
+export const getSeo = (page: PageKey, lang: Lang) => {
+    const s = SEO[page];
+    return { title: s.title[lang], description: s.description[lang] };
+};
+
+export const buildMetadata = (page: PageKey, lang: Lang): Metadata => {
+    const { title, description } = getSeo(page, lang);
+    return {
+        title,
+        description,
+        openGraph: { title, description },
+        twitter: { card: "summary", title, description },
+    };
+};
