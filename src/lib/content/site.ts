@@ -16,7 +16,9 @@ export const SITE = {
             it: "Ciao, sono Lorenzo 👋",
         } as MLString,
         long: {
-            en: "TODO1",
+            en: "I’m a **backend developer with a data-driven mindset**.\n\n" +
+                "_BANKING EXPERIENCE_. I have collaborated with some of the **leading European banking groups**, taking care of analysis, design, and implementation of key applications.\n\n" +
+                "_FOCUS ON BACKEND, ATTENTION TO DATA_. I mainly work with **Java and Spring**, with particular attention to **optimized SQL queries, efficient processes, and well-structured databases**.",
             it:
                 "Sono uno **sviluppatore backend con una mente data-driven**.\n\n" +
                 "_ESPERIENZA IN AMBITO BANCARIO_. Ho collaborato con alcuni tra i **principali gruppi bancari europei**, seguendo in prima persona analisi, progettazione e implementazione di applicativi chiave.\n\n" +
