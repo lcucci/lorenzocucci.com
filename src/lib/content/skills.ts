@@ -8,7 +8,7 @@ export const SKILLS: Skill[] = [
         },
         items: ["Java", "SQL", "Python", "Bash", "JavaScript", "PHP"],
         highlight: ["Java", "SQL"],
-        accent: "oklch(0.745 0.165 45.595)"
+        accent: "oklch(0.811 0.263 142.201)"
     },
     {
         group: {
@@ -17,7 +17,7 @@ export const SKILLS: Skill[] = [
         },
         items: ["PostgreSQL", "Oracle DB", "MySQL", "MariaDB"],
         highlight: ["PostgreSQL", "Oracle DB", "MySQL", "MariaDB"],
-        accent: "oklch(70% 0.17 145)"
+        accent: "oklch(0.781 0.13 194.817)"
     },
     {
         group: {
@@ -26,7 +26,7 @@ export const SKILLS: Skill[] = [
         },
         items: ["Spring", "Spring Batch", "Hibernate", "JUnit", "SQLAlchemy"],
         highlight: ["Spring", "Spring Batch", "Hibernate"],
-        accent: "oklch(0.787 0.132 201.618)"
+        accent: "oklch(0.854 0.17 99.634)"
     },
     {
         group: {
@@ -35,7 +35,7 @@ export const SKILLS: Skill[] = [
         },
         items: ["Git", "RTC", "Maven", "Jenkins", "JBoss", "Google Cloud Platform"],
         highlight: ["Git", "Maven"],
-        accent: "oklch(0.455 0.115 255.079)"
+        accent: "oklch(0.665 0.162 55.959)"
     },
     {
         group: {
@@ -44,7 +44,7 @@ export const SKILLS: Skill[] = [
         },
         items: ["Microsoft Excel", "Postman", "IntelliJ", "Eclipse", "PyCharm", "WebStorm", "Erwin"],
         highlight: ["Microsoft Excel", "IntelliJ", "Erwin"],
-        accent: "oklch(0.625 0.199 298.283)"
+        accent: "oklch(0.457 0.182 27.89)"
     },
     {
         group: {
@@ -53,6 +53,6 @@ export const SKILLS: Skill[] = [
         },
         items: ["Jira", "Confluence", "ServiceNow"],
         highlight: ["Jira"],
-        accent: "oklch(0.543 0.205 26.174)"
+        accent: "oklch(0.506 0.195 295.669)"
     },
 ];
