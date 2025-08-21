@@ -105,6 +105,7 @@ body {
   transform: scale(1.15);
   stroke-width: 2.5;
 }
+.site-nav .nav-link svg { display: block; }
 
 /* Ghost buttons (theme/lang) */
 .btn-ghost {
@@ -172,3 +173,5 @@ html.dark .text-gray-700 {
   background: color-mix(in oklab, var(--skill-accent) 20%, var(--card-bg) 80%);
 }
 .skill-chip:active { transform: translateY(0.5px); }
+
+
