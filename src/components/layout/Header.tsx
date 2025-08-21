@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Globe2, Moon, Sun, Home as HomeIcon, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { UI, tr } from "@/lib/content";
+import { SITE, UI, tr } from "@/lib/content";
 import {
     NavLink,
     HeaderLogo,
@@ -25,16 +25,12 @@ export default function Header() {
     const close = useCallback(() => setOpen(false), []);
     const toggle = useCallback(() => setOpen((v) => !v), []);
 
-    // lock body scroll when menu is open
     useEffect(() => {
         const prev = document.body.style.overflow;
         document.body.style.overflow = open ? "hidden" : prev || "";
-        return () => {
-            document.body.style.overflow = prev || "";
-        };
+        return () => void (document.body.style.overflow = prev || "");
     }, [open]);
 
-    // close on Esc
     useEffect(() => {
         if (!open) return;
         const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
@@ -42,7 +38,6 @@ export default function Header() {
         return () => window.removeEventListener("keydown", onKey);
     }, [open, close]);
 
-    // close overlay when switching to ≥ md
     useEffect(() => {
         const mq = window.matchMedia("(min-width: 768px)");
         const handler = () => mq.matches && close();
@@ -60,12 +55,17 @@ export default function Header() {
 
     return (
         <header className="site-header sticky top-0 z-50 border-b border-slate-200/60 dark:border-slate-800">
+            {/* grid: [left auto] [center 1fr] [right auto] */}
             <div className="mx-auto max-w-6xl px-4 py-3 grid grid-cols-[auto_1fr_auto] items-center">
-                {/* Left: logo */}
-                <div className="flex items-center">
-                    <Link href={href("/")} aria-label="Home" className="inline-flex">
+                {/* Left: logo + title (title only ≥ md) */}
+                <div className="flex items-center gap-3 min-w-0">
+                    <Link href={href("/")} aria-label="Home" className="inline-flex shrink-0">
                         <HeaderLogo />
                     </Link>
+                    <div className="hidden md:block leading-tight min-w-0">
+                        <div className="font-semibold truncate">{tr(SITE.title, lang)}</div>
+                        <div className="text-xs opacity-80 truncate">{tr(SITE.subtitle, lang)}</div>
+                    </div>
                 </div>
 
                 {/* Center: hamburger (mobile) + navbar (desktop) */}
