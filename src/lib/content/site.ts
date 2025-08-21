@@ -22,7 +22,7 @@ export const SITE = {
             it:
                 "Sono uno **sviluppatore backend con una mente data-driven**.\n\n" +
                 "_ESPERIENZA IN AMBITO BANCARIO_. Ho collaborato con alcuni tra i **principali gruppi bancari europei**, seguendo in prima persona analisi, progettazione e implementazione di applicativi chiave.\n\n" +
-                "_FOCUS SUL BACKEND, ATTENZIONE AI DATI_. Lavoro soprattutto con **Java e Spring**, con un’attenzione particolare a **query SQL ottimizzate, processi efficienti e database ben strutturati**.\n\n"
+                "_FOCUS SUL BACKEND, ATTENZIONE AI DATI_. Lavoro soprattutto con **Java e Spring**, con un’attenzione particolare a **query SQL ottimizzate**, **processi efficienti** e **database ben strutturati**.\n\n"
         } as MLString,
     },
     sections: {

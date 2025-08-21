@@ -89,10 +89,7 @@ export default function HomePage() {
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {SKILLS.map((group, idx) => {
-                const accent =
-                    group.accent ??
-                    ["oklch(72% 0.18 45)","oklch(70% 0.17 145)","oklch(69% 0.16 200)",
-                      "oklch(67% 0.16 255)","oklch(66% 0.16 300)","oklch(71% 0.17 20)"][idx % 6];
+                const accent = group.accent;
 
                 return (
                     <div
