@@ -37,7 +37,7 @@ export const EXPERIENCES: Experience[] = [
                         "- Implementazione di interfacce **API REST**, adeguate agli standard del cliente\n" +
                         "- Redazione di documentazione tecnico-funzionale a supporto di numerosi rilasci"
                 },
-                skills: ["Java", "SQL", "Bash", "Oracle DB", "Spring", "Hibernate", "JUnit", "Git", "RTC", "Maven", "Jenkins", "Microsoft Excel", "Postman", "IntelliJ", "Jira", "Confluence"],
+                skills: ["Java", "SQL", "Bash", "Oracle DB", "Spring", "Spring Batch", "Hibernate", "JUnit", "Git", "RTC", "Maven", "Jenkins", "Microsoft Excel", "Postman", "IntelliJ", "Jira", "Confluence"],
             },
         ]
     },
@@ -78,7 +78,7 @@ export const EXPERIENCES: Experience[] = [
                         "- Riscrittura completa di procedure **SQL**, con riduzione dei tempi di esecuzione di oltre il **50%**\n" +
                         "- Mantenimento costante dei **KPI di qualità del codice** richiesti dal cliente"
                 },
-                skills: ["Java", "SQL", "Bash", "Spring", "Hibernate", "JUnit", "MariaDB", "RTC", "Maven", "JBoss", "Microsoft Excel", "Eclipse", "Erwin"],
+                skills: ["Java", "SQL", "Bash", "MariaDB", "Spring", "Spring Batch", "Hibernate", "JUnit", "RTC", "Maven", "JBoss", "Microsoft Excel", "Eclipse", "Erwin"],
             },
             {
                 description: {
@@ -92,7 +92,7 @@ export const EXPERIENCES: Experience[] = [
                         "- Progettazione del modello **ER** dell'applicativo\n" +
                         "- Creazione da zero dell'applicativo in collaborazione diretta con il Business Owner\n" +
                         "- Redazione della **documentazione tecnica** e dei manuali dell'applicativo\n" },
-                skills: ["Java", "SQL", "JavaScript", "Spring", "Hibernate", "JUnit", "MariaDB", "Git", "Maven", "JBoss", "Microsoft Excel", "Postman", "IntelliJ", "Erwin", "ServiceNow"],
+                skills: ["Java", "SQL", "JavaScript", "MariaDB", "Spring", "Hibernate", "JUnit", "Git", "Maven", "JBoss", "Microsoft Excel", "Postman", "IntelliJ", "Erwin", "ServiceNow"],
             },
             {
                 description: {
@@ -107,7 +107,7 @@ export const EXPERIENCES: Experience[] = [
                         "- Supporto tecnico al cliente durante le attività di migrazione su **Google Cloud Platform**\n" +
                         "- Gestione e risoluzione delle segnalazioni di anomalie tramite il sistema di ticketing **ServiceNow**\n"
                 },
-                skills: ["Java", "SQL", "Spring", "Hibernate", "JUnit", "PostgreSQL", "Oracle DB", "Git", "Maven", "Google Cloud Platform", "IntelliJ", "ServiceNow"],
+                skills: ["Java", "SQL", "PostgreSQL", "Oracle DB", "Spring", "Hibernate", "JUnit", "Git", "Maven", "Google Cloud Platform", "IntelliJ", "ServiceNow"],
             },
         ],
     }
