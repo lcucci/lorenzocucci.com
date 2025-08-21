@@ -1,4 +1,3 @@
-// app/(home)/page.tsx
 "use client";
 
 import React from "react";
@@ -39,7 +38,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="space-y-10"
+            className="-mt-3 md:-mt-4 space-y-7"
         >
           <div className="grid md:grid-cols-3 gap-8 items-start">
             <div className="md:col-span-2">
@@ -84,7 +83,7 @@ export default function HomePage() {
 
           {/* Skills */}
           <div className="card p-4">
-            <div className="text-sm font-bold mb-3">
+            <div className="text-base font-bold mb-3">
               {tr(SITE.home.toolbelt, lang)}
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -100,7 +99,7 @@ export default function HomePage() {
                           background: "color-mix(in oklab, var(--card-bg) 92%, transparent)",
                         }}
                     >
-                      <div className="text-xs font-bold mb-2 opacity-90">
+                      <div className="text-sm font-bold mb-2 opacity-90">
                         {tr(group.group, lang)}
                       </div>
                       <div className="flex flex-wrap gap-2">
@@ -109,8 +108,8 @@ export default function HomePage() {
                           const strong = !!group.highlight?.includes(label);
                           return (
                               <span key={`${label}-${i}`} className="skill-chip">
-                <span className={strong ? "font-semibold" : undefined}>{label}</span>
-              </span>
+                          <span className={strong ? "font-semibold" : undefined}>{label}</span>
+                        </span>
                           );
                         })}
                       </div>

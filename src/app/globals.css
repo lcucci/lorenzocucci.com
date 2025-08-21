@@ -104,12 +104,14 @@ body {
   background: var(--btn-ghost-hover) !important;
 }
 .site-nav .nav-link[data-active="true"] {
-  background: var(--nav-active-bg);
-  box-shadow: 0 0 0 2px var(--nav-active-ring);
+  font-weight: 600; /* bold for current page */
 }
 .site-nav .nav-link[data-active="true"]:hover {
-  background: var(--nav-active-bg) !important;
-  box-shadow: 0 0 0 2px var(--nav-active-ring);
+  font-weight: 600;
+}
+.site-nav .nav-link[data-active="true"] svg {
+  transform: scale(1.15);
+  stroke-width: 2.5; /* leggermente più spessa */
 }
 
 /* Ghost buttons (header: theme/lang) */
@@ -162,11 +164,9 @@ html.dark .text-gray-700 {
 }
 
 :root {
-  /* default per evitare warning “Cannot resolve” e avere un fallback */
   --skill-accent: oklch(68% 0.16 255);
 }
 
-/* Chip per le skill, colorato dal gruppo via --skill-accent */
 .skill-chip {
   display: inline-flex;
   align-items: center;

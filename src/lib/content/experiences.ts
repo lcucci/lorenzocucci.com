@@ -16,9 +16,13 @@ export const EXPERIENCES: Experience[] = [
             en: "Milan, Italy",
             it: "Milano, Italia"
         },
-        period: {
-            en: "08/2024 – now",
-            it: "08/2024 – ora"
+        startDate: {
+            en: "10/2024",
+            it: "10/2024"
+        },
+        endDate: {
+            en: "now",
+            it: "ora"
         },
         projects: [
             {
@@ -48,8 +52,18 @@ export const EXPERIENCES: Experience[] = [
             en: "Backend Developer",
             it: "Sviluppatore Backend",
         },
-        location: { en: "Milan, Italy", it: "Milano, Italia" },
-        period: { en: "09/2021 – 07/2024", it: "09/2021 – 07/2024" },
+        location:{
+            en: "Milan, Italy",
+            it: "Milano, Italia"
+        },
+        startDate: {
+            en: "09/2021",
+            it: "09/2021"
+        },
+        endDate: {
+            en: "09/2024",
+            it: "09/2025"
+        },
         projects: [
             {
                 description: {

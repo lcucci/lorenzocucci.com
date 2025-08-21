@@ -24,7 +24,8 @@ export interface Experience {
     companyUrl?: string;
     role: MLString;
     location: MLString;
-    period: MLString;
+    startDate: MLString;
+    endDate: MLString;
     projects?: ExperienceProject[];
 }
 

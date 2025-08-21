@@ -14,7 +14,7 @@ export default function ExperiencePage() {
     const accentMap = React.useMemo(() => buildSkillAccentMap(lang as "it" | "en"), [lang]);
 
     const toggle = (idx: number) =>
-        setOpen((prev) => {
+        setOpen(prev => {
             const next = [...prev];
             next[idx] = !next[idx];
             return next;
@@ -35,8 +35,11 @@ export default function ExperiencePage() {
                     const company = tr(exp.company, lang);
                     const role = tr(exp.role, lang);
                     const location = tr(exp.location, lang);
-                    const period =
-                        typeof (exp as any).period === "string" ? (exp as any).period : tr(exp.period as any, lang);
+
+                    // New dates (assumed always present)
+                    const startDate = tr((exp as any).startDate, lang);
+                    const endDate = tr((exp as any).endDate, lang);
+
                     const isOpen = open[idx];
 
                     const CompanyWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
@@ -45,6 +48,7 @@ export default function ExperiencePage() {
                                 href={exp.companyUrl}
                                 target="_blank"
                                 rel="noreferrer"
+                                title={company}
                                 onClick={(e) => e.stopPropagation()}
                                 className="hover:underline"
                             >
@@ -66,21 +70,26 @@ export default function ExperiencePage() {
                                 className="flex items-start justify-between gap-3 pr-10 cursor-pointer select-none group"
                                 title={isOpen ? tr(UI.ui.collapse, lang) : tr(UI.ui.expand, lang)}
                             >
+                                {/* Left: logo + 3-line title (role / company / location) */}
                                 <div className="flex items-center gap-3">
                                     <CompanyWrapper>
                                         <BrandLogo src={exp.companyLogo} label={company} />
                                     </CompanyWrapper>
                                     <div className="min-w-0">
+                                        <div className="text-sm opacity-90">{role}</div>
                                         <CompanyWrapper>
-                                            <div className="font-semibold text-base md:text-lg leading-tight truncate">{company}</div>
+                                            <div className="font-semibold text-base md:text-lg leading-tight truncate">
+                                                {company}
+                                            </div>
                                         </CompanyWrapper>
-                                        <div className="text-sm text-[var(--muted)]">{role}</div>
+                                        <div className="text-sm opacity-80">{location}</div>
                                     </div>
                                 </div>
 
+                                {/* Right: two-line dates (startDate / endDate) */}
                                 <div className="flex flex-col items-end text-sm">
-                                    <div>{period}</div>
-                                    <div className="text-[var(--muted)]">{location}</div>
+                                    <div>{startDate}</div>
+                                    <div>{endDate}</div>
                                 </div>
 
                                 <ChevronDown
@@ -110,7 +119,9 @@ export default function ExperiencePage() {
                                                         }}
                                                     >
                                                         {projDesc ? (
-                                                            <Markdown className="text-sm md:text-base opacity-90">{projDesc}</Markdown>
+                                                            <Markdown className="text-sm md:text-base opacity-90">
+                                                                {projDesc}
+                                                            </Markdown>
                                                         ) : null}
 
                                                         {p.skills?.length ? (
@@ -123,7 +134,7 @@ export default function ExperiencePage() {
                                                                             className="skill-chip"
                                                                             style={{ ["--skill-accent" as any]: accent }}
                                                                         >
-                                                                        {s}
+                                                                            {s}
                                                                         </span>
                                                                     );
                                                                 })}
