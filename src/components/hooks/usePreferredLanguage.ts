@@ -2,7 +2,7 @@
 
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
-import type { Lang } from "@/lib/content";
+import type { Lang } from "@/lib/types";
 
 const LOCALES: Lang[] = ["it", "en"];
 

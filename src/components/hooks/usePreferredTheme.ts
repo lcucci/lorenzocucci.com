@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Theme } from "@/types/common";
+import type { Theme } from "@/lib/types";
 
 export function usePreferredTheme() {
   const getInitial = (): Theme => {
