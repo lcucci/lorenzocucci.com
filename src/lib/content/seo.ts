@@ -35,8 +35,8 @@ export const SEO: Record<PageKey, PageSeo> = {
             it: "Sviluppatore Backend • Data Analyst. Portfolio con progetti, esperienza e certificazioni.",
         },
         keywords: {
-            en: ["Lorenzo Cucci", "Portfolio", "Backend Developer", "Data Analyst", "TypeScript", "Next.js"],
-            it: ["Lorenzo Cucci", "Portfolio", "Sviluppatore Backend", "Data Analyst", "TypeScript", "Next.js"],
+            en: ["Lorenzo Cucci", "Portfolio", "Backend Developer", "Data Analyst", "Java", "SQL"],
+            it: ["Lorenzo Cucci", "Portfolio", "Sviluppatore Backend", "Data Analyst", "Java", "SQL"],
         },
     },
     experience: {
@@ -57,8 +57,8 @@ export const SEO: Record<PageKey, PageSeo> = {
             it: "Progetti personali e open-source con codice, stack e lezioni apprese.",
         },
         keywords: {
-            en: ["Projects", "Open Source", "TypeScript", "Python", "PostgreSQL"],
-            it: ["Progetti", "Open Source", "TypeScript", "Python", "PostgreSQL"],
+            en: ["Projects", "Open Source", "GitHub", "TrovaBenzinaBot", "Python", "PostgreSQL"],
+            it: ["Progetti", "Open Source", "GitHub", "TrovaBenzinaBot", "Python", "PostgreSQL"],
         },
     },
     certifications: {
@@ -68,8 +68,8 @@ export const SEO: Record<PageKey, PageSeo> = {
             it: "Certificazioni professionali e credenziali.",
         },
         keywords: {
-            en: ["Certifications", "Cloud", "Developer"],
-            it: ["Certificazioni", "Cloud", "Developer"],
+            en: ["Certifications", "Cloud", "Developer", "Google Cloud", "Cloud Digital Leader"],
+            it: ["Certificazioni", "Cloud", "Developer", "Google Cloud", "Cloud Digital Leader"],
         },
     },
 };
@@ -160,7 +160,7 @@ export const buildMetadata = (
             card: "summary",
             title,
             description,
-            site: "@lorenzocucci", // update if you want to use a real handle
+            site: "@lorenzocucci02",
         },
         icons: {
             icon: "/favicon.ico",
