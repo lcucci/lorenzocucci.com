@@ -9,6 +9,8 @@ export const UI = {
         skills: { en: "Skills", it: "Competenze" } as MLString,
         language: { en: "Language", it: "Lingua" } as MLString,
         theme: { en: "Theme", it: "Tema" } as MLString,
+        openMenu: { en: "Open Menu", it: "Apri Menu" } as MLString,
+        closeMenu: { en: "Close Menu", it: "Chiudi Menu" } as MLString,
     },
     actions: {
         viewCredential: { en: "Credential", it: "Credenziale" } as MLString,

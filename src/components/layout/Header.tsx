@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState, useCallback } from "react";
-import { Globe2, Moon, Sun, Home as HomeIcon, Menu, X } from "lucide-react";
+import { Globe2, Moon, Sun, Home as HomeIcon, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE, UI, tr } from "@/lib/content";
@@ -25,25 +25,21 @@ export default function Header() {
     const close = useCallback(() => setOpen(false), []);
     const toggle = useCallback(() => setOpen((v) => !v), []);
 
-    useEffect(() => {
-        const prev = document.body.style.overflow;
-        document.body.style.overflow = open ? "hidden" : prev || "";
-        return () => void (document.body.style.overflow = prev || "");
-    }, [open]);
-
-    useEffect(() => {
-        if (!open) return;
-        const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
-        window.addEventListener("keydown", onKey);
-        return () => window.removeEventListener("keydown", onKey);
-    }, [open, close]);
-
+    // Close menu on ≥ md
     useEffect(() => {
         const mq = window.matchMedia("(min-width: 768px)");
         const handler = () => mq.matches && close();
         mq.addEventListener("change", handler);
         return () => mq.removeEventListener("change", handler);
     }, [close]);
+
+    // Close on Esc
+    useEffect(() => {
+        if (!open) return;
+        const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, [open, close]);
 
     const items = [
         { path: "/", label: tr(UI.nav.home, lang), icon: HomeIcon },
@@ -54,12 +50,25 @@ export default function Header() {
     const isActive = (p: string) => pathname === href(p).replace(/\/+$/, "");
 
     return (
-        <header className="site-header sticky top-0 z-50 border-b border-slate-200/60 dark:border-slate-800">
-            {/* grid: [left auto] [center 1fr] [right auto] */}
+        <header className="site-header sticky top-0 z-50 border-b border-slate-200/60 dark:border-slate-800 bg-[var(--background)]">
+            {/* Top bar: [left auto] [center 1fr] [right auto] */}
             <div className="mx-auto max-w-6xl px-4 py-3 grid grid-cols-[auto_1fr_auto] items-center">
-                {/* Left: logo + title (title only ≥ md) */}
-                <div className="flex items-center gap-3 min-w-0">
-                    <Link href={href("/")} aria-label="Home" className="inline-flex shrink-0">
+                {/* Left: hamburger (mobile) + logo+title (desktop) */}
+                <div className="flex items-center gap-2 min-w-0">
+                    {/* Hamburger < md */}
+                    <button
+                        type="button"
+                        aria-label={open ? tr(UI.nav.closeMenu, lang) : tr(UI.nav.openMenu, lang)}
+                        aria-haspopup="menu"
+                        aria-expanded={open}
+                        onClick={toggle}
+                        className="btn-ghost inline-flex items-center gap-2 px-3 py-2 md:hidden"
+                    >
+                        <Menu className="h-6 w-6" />
+                    </button>
+
+                    {/* Desktop logo + title ≥ md */}
+                    <Link href={href("/")} aria-label="Home" className="hidden md:inline-flex shrink-0">
                         <HeaderLogo />
                     </Link>
                     <div className="hidden md:block leading-tight min-w-0">
@@ -68,21 +77,19 @@ export default function Header() {
                     </div>
                 </div>
 
-                {/* Center: hamburger (mobile) + navbar (desktop) */}
-                <div className="flex justify-center">
-                    {/* Hamburger button visible < md */}
-                    <button
-                        type="button"
-                        aria-label="Open menu"
-                        aria-haspopup="menu"
-                        aria-expanded={open}
-                        onClick={toggle}
-                        className="btn-ghost inline-flex items-center gap-2 px-3 py-2 md:hidden"
+                {/* Center: mobile logo+title (centered) + desktop navbar */}
+                <div className="flex justify-center min-w-0">
+                    {/* Mobile logo + title */}
+                    <Link
+                        href={href("/")}
+                        className="md:hidden inline-flex items-center gap-3 min-w-0"
+                        aria-label={tr(UI.nav.home, lang)}
                     >
-                        {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                    </button>
+                        <HeaderLogo />
+                        <span className="font-semibold truncate">{tr(SITE.title, lang)}</span>
+                    </Link>
 
-                    {/* Horizontal navbar visible ≥ md */}
+                    {/* Desktop navbar */}
                     <nav className="site-nav hidden md:flex items-center gap-2">
                         <NavLink href={href("/")} isActive={isActive("/")}>
                             <HomeIcon className="h-4 w-4" aria-hidden="true" />
@@ -125,39 +132,34 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Mobile overlay menu */}
-            {open && (
-                <div className="fixed inset-0 z-50 md:hidden" aria-hidden="true" onClick={close}>
-                    <div className="absolute inset-0 bg-black/35 backdrop-blur-[1px]" />
-                    <nav
-                        role="menu"
-                        aria-label="Main"
-                        className="absolute left-1/2 top-16 -translate-x-1/2 w-[min(92vw,28rem)] rounded-2xl border border-slate-200 dark:border-slate-800 bg-[var(--card-bg)] text-[var(--card-fg)] shadow-xl"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <ul className="p-2">
+            {/* Mobile inline menu (pushes page content down), with subtle transition */}
+            <div
+                className={[
+                    "md:hidden border-t border-slate-200 dark:border-slate-800",
+                    "overflow-hidden transition-all duration-200 ease-out transform",
+                    open ? "max-h-[60vh] opacity-100 translate-y-0 pointer-events-auto" : "max-h-0 opacity-0 -translate-y-1 pointer-events-none",
+                ].join(" ")}
+                aria-hidden={!open}
+            >
+                <div className="mx-auto max-w-6xl px-4">
+                    <nav role="menu" aria-label="Main">
+                        <ul className="py-1 divide-y divide-slate-200 dark:divide-slate-800">
                             {items.map(({ path, label, icon: Icon }) => {
                                 const active = isActive(path);
-                                const isHome = path === "/";
-
                                 return (
                                     <li key={path}>
                                         <Link
                                             href={href(path)}
-                                            onClick={close}
-                                            aria-label={isHome ? label : undefined}
-                                            title={isHome ? label : undefined}
+                                            onClick={() => setOpen(false)}
                                             className={[
-                                                "flex items-center justify-center w-full rounded-xl px-3 py-3 transition text-center",
+                                                "flex items-center gap-3 rounded-xl px-3 py-3 transition",
                                                 "hover:bg-[var(--card-hover-bg)]",
                                                 active ? "font-semibold" : "font-medium",
+                                                "justify-start text-left",
                                             ].join(" ")}
                                         >
-                                            {isHome ? (
-                                                <HomeIcon className="h-5 w-5" />
-                                            ) : (
-                                                <span>{label}</span>
-                                            )}
+                                            {Icon ? <Icon className="h-5 w-5" /> : null}
+                                            <span>{label}</span>
                                         </Link>
                                     </li>
                                 );
@@ -165,7 +167,7 @@ export default function Header() {
                         </ul>
                     </nav>
                 </div>
-            )}
+            </div>
         </header>
     );
 }
