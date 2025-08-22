@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/* Tailwind tokens -> CSS variables */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--text);
+}
+
+/* =========================
+   Design tokens (single source of truth)
+   ========================= */
+:root {
+  /* Light */
+  --canvas: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+
+  /* Cards (light) */
+  --card-bg: #ffffff;
+  --card-fg: #0f172a;
+  --card-border: #0f172a;
+
+  /* Nav + hover (light) */
+  --nav-active-bg: rgba(0, 0, 0, 0.06);
+  --nav-active-ring: rgba(37, 99, 235, 0.25);
+  --btn-ghost-hover: #f1f5f9;
+  --card-hover-bg: #f1f5f9;
+
+  /* Tailwind aliases */
+  --background: var(--canvas);
+  --foreground: var(--text);
+
+  /* Skill accent (OKLCH) */
+  --skill-accent: oklch(68% 0.16 255);
+
+  /* Misc */
+  scrollbar-gutter: stable;
+}
+
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+html.dark {
+  /* Dark */
+  --canvas: #0d1b2a;
+  --text: #eef2f7;
+  --muted: #c3d0e0;
+
+  /* Cards (dark) */
+  --card-bg: #0d1b2a;
+  --card-fg: #eef2f7;
+  --card-border: #f1f5f9;
+
+  /* Nav + hover (dark) */
+  --nav-active-bg: color-mix(in oklab, var(--canvas) 55%, white 45%);
+  --nav-active-ring: color-mix(in oklab, #93c5fd 70%, transparent 30%);
+  --btn-ghost-hover: color-mix(in oklab, var(--canvas) 70%, white 30%);
+  --card-hover-bg: color-mix(in oklab, var(--card-bg) 80%, white 20%);
+
+  /* Keep Tailwind aliases in sync */
+  --background: var(--canvas);
+  --foreground: var(--text);
+}
+
+/* =========================
+   Base
+   ========================= */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Header matches page background */
+.site-header { background: var(--background); }
+
+/* =========================
+   Components
+   ========================= */
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem; /* ~ rounded-2xl */
+}
+.card :where(h1, h2, h3, h4, h5, h6, p, span, small, strong, em, li, div) {
+  color: var(--card-fg);
+}
+
+/* Header nav links */
+.site-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem; /* ~ px-3 py-2 */
+  border-radius: 0.75rem;  /* rounded-xl */
+  transition: background .2s ease, color .2s ease;
+}
+.site-nav .nav-link:hover { background: var(--btn-ghost-hover); }
+.site-nav .nav-link[data-active="true"] { font-weight: 600; }
+.site-nav .nav-link[data-active="true"] svg {
+  transform: scale(1.15);
+  stroke-width: 2.5;
+}
+.site-nav .nav-link svg { display: block; }
+
+/* Ghost buttons (theme/lang) */
+.btn-ghost {
+  border-radius: 0.75rem;
+  transition: background .2s ease, transform .15s ease;
+}
+.btn-ghost:hover { background: var(--btn-ghost-hover); }
+.btn-ghost:active { transform: translateY(0.5px); }
+
+/* Solid brand buttons (home CTA) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem; /* ~ px-4 py-2.5 */
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: filter .2s ease, transform .15s ease;
+}
+.btn:active { transform: translateY(0.5px); }
+.btn-github { background: #181717; color: #fff; }
+.btn-github:hover { background: #181717; }
+.btn-linkedin { background: #0A66C2; color: #fff; }
+.btn-linkedin:hover { background: #0A66C2; }
+
+/* Home link-cards hover */
+.card-action {
+  transition: background .2s ease, box-shadow .2s ease, transform .15s ease;
+}
+.card-action:hover { background: var(--card-hover-bg); }
+.card-action:active { transform: translateY(0.5px); }
+
+/* =========================
+   Dark-mode readability helpers
+   ========================= */
+html.dark .bg-slate-50,
+html.dark .bg-slate-100,
+html.dark .bg-gray-50,
+html.dark .bg-gray-100 {
+  background-color: var(--card-bg) !important;
+}
+html.dark .text-slate-900,
+html.dark .text-gray-900 {
+  color: var(--card-fg) !important;
+}
+html.dark .text-slate-700,
+html.dark .text-gray-700 {
+  color: var(--muted) !important;
+}
+
+/* =========================
+   Skill chips
+   ========================= */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--skill-accent) 50%, var(--card-border) 50%);
+  background: color-mix(in oklab, var(--skill-accent) 14%, var(--card-bg) 86%);
+  transition: background .2s ease, border-color .2s ease, transform .15s ease;
+}
+.skill-chip:hover {
+  background: color-mix(in oklab, var(--skill-accent) 20%, var(--card-bg) 80%);
+}
+.skill-chip:active { transform: translateY(0.5px); }
+
+

@@ -1,0 +1,48 @@
+name: Mirror to private repo
+
+on:
+  push:
+    branches: ['**']
+    tags: ['**']
+  delete: {}
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Detach HEAD to allow ref updates
+        run: |
+          set -euo pipefail
+          git checkout --detach
+
+      - name: Fetch all branches and tags
+        run: |
+          set -euo pipefail
+          git fetch origin +refs/heads/*:refs/heads/* --prune
+          git fetch origin +refs/tags/*:refs/tags/* --prune-tags
+
+      - name: Configure mirror remote
+        env:
+          MIRROR_OWNER: ${{ secrets.MIRROR_OWNER }}
+          MIRROR_REPO:  ${{ secrets.MIRROR_REPO }}
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config --global --unset-all http.https://github.com/.extraheader || true
+          git remote add mirror "https://${MIRROR_OWNER}:${MIRROR_TOKEN}@github.com/${MIRROR_OWNER}/${MIRROR_REPO}.git"
+          git ls-remote --heads mirror > /dev/null
+
+      - name: Push all refs to mirror
+        run: |
+          set -euo pipefail
+          git push --prune --mirror mirror
