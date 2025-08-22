@@ -4,7 +4,8 @@ import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Globe2, Moon, Sun, Home as HomeIcon, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SITE, UI, tr } from "@/lib/content";
+import { SITE, UI } from "@/lib/content";
+import { tr } from "@/lib/types";
 import {
     NavLink,
     HeaderLogo,
@@ -111,7 +112,7 @@ export default function Header() {
                 <div className="flex items-center gap-2 justify-self-end">
                     <button
                         className="btn-ghost inline-flex items-center gap-1 px-2.5 py-2"
-                        onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
+                        onClick={() => setTheme((prev: string) => (prev === "dark" ? "light" : "dark"))}
                         aria-label={tr(UI.nav.theme, lang)}
                         title={tr(UI.nav.theme, lang)}
                         type="button"
@@ -121,7 +122,7 @@ export default function Header() {
 
                     <button
                         className="btn-ghost inline-flex items-center gap-1 px-2.5 py-2"
-                        onClick={() => setLang((l) => (l === "en" ? "it" : "en"))}
+                        onClick={() => setLang((l: string) => (l === "en" ? "it" : "en"))}
                         aria-label={tr(UI.nav.language, lang)}
                         title={tr(UI.nav.language, lang)}
                         type="button"

@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Github, Linkedin, Briefcase, Code2, Award } from "lucide-react";
 import SiteShell from "@/components/layout/SiteShell";
-import { SITE, UI, PROJECTS, CERTIFICATIONS, SKILLS, tr } from "@/lib/content";
+import { SITE, UI, PROJECTS, CERTIFICATIONS, SKILLS } from "@/lib/content";
+import { tr } from "@/lib/types";
 import { Badge, usePreferredLanguage, useLocaleHref } from "@/components";
 import Markdown from "@/components/utils/Markdown";
 
@@ -84,7 +85,7 @@ export default function HomePage() {
           {/* Skills */}
           <div className="card p-4">
             <div className="text-base font-bold mb-3">
-              {tr(SITE.home.toolbelt, lang)}
+              {tr(SITE.sections.skills, lang)}
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {SKILLS.map((group, idx) => {

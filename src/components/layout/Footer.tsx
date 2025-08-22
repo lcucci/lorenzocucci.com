@@ -2,7 +2,8 @@
 
 import React from "react";
 import { Github, Linkedin } from "lucide-react";
-import { SITE, UI, tr, type Lang } from "@/lib/content";
+import { SITE, UI } from "@/lib/content";
+import { type Lang, tr } from "@/lib/types";
 
 export function Footer({ lang }: { lang: Lang }) {
     return (

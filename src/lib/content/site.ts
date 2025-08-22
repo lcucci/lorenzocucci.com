@@ -1,7 +1,10 @@
-import type { MLString } from "./types";
+import type { MLString } from "@/lib/types";
 
 export const SITE = {
-    title: { en: "Lorenzo Cucci", it: "Lorenzo Cucci" } as MLString,
+    title: {
+        en: "Lorenzo Cucci",
+        it: "Lorenzo Cucci"
+    } as MLString,
     subtitle: {
         en: "Backend Developer • Data Analyst",
         it: "Sviluppatore Backend • Data Analyst",
@@ -26,12 +29,21 @@ export const SITE = {
         } as MLString,
     },
     sections: {
-        experience: { en: "Professional experience", it: "Esperienza professionale" } as MLString,
-        projects: { en: "Personal projects", it: "Progetti personali" } as MLString,
-        certifications: { en: "Certifications", it: "Certificazioni" } as MLString,
-        skills: { en: "Skills", it: "Competenze" } as MLString,
-    },
-    home: {
-        toolbelt: { en: "Skills", it: "Competenze" } as MLString,
+        experience: {
+            en: "Professional experience",
+            it: "Esperienza professionale"
+        } as MLString,
+        projects: {
+            en: "Personal projects",
+            it: "Progetti personali"
+        } as MLString,
+        certifications: {
+            en: "Certifications",
+            it: "Certificazioni"
+        } as MLString,
+        skills: {
+            en: "Skills",
+            it: "Competenze"
+        } as MLString,
     },
 } as const;

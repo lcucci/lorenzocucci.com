@@ -1,6 +1,5 @@
-// lib/content/seo.ts
 import type { Metadata } from "next";
-import type { MLString, Lang } from "./types";
+import type { MLString, Lang } from "@/lib/types";
 
 type PageSeo = { title: MLString; description: MLString };
 export type PageKey = "home" | "experience" | "projects" | "certifications" | "skills";

@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, BrandLogo } from "@/components/ui";
-import { SITE, EXPERIENCES, tr, UI } from "@/lib/content";
+import { SITE, EXPERIENCES, UI } from "@/lib/content";
+import { tr } from "@/lib/types";
 import { Briefcase, ChevronDown } from "lucide-react";
 import { usePreferredLanguage, buildSkillAccentMap } from "@/components";
 import Markdown from "@/components/utils/Markdown";
@@ -68,7 +69,7 @@ export default function ExperiencePage() {
                                 onClick={() => toggle(idx)}
                                 onKeyDown={(e) => onHeaderKey(idx, e)}
                                 className="flex items-start justify-between gap-3 pr-10 cursor-pointer select-none group"
-                                title={isOpen ? tr(UI.ui.collapse, lang) : tr(UI.ui.expand, lang)}
+                                title={isOpen ? tr(UI.actions.collapse, lang) : tr(UI.actions.expand, lang)}
                             >
                                 {/* Left: logo + 3-line title (role / company / location) */}
                                 <div className="flex items-center gap-3">

@@ -1,4 +1,5 @@
-import { SKILLS, tr } from "@/lib/content";
+import { SKILLS } from "@/lib/content";
+import { tr } from "@/lib/types";
 
 export type Lang = "it" | "en";
 

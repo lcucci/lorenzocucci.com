@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, BrandLogo } from "@/components/ui";
-import { SITE, PROJECTS, tr, UI } from "@/lib/content";
+import { SITE, PROJECTS, UI } from "@/lib/content";
+import { tr } from "@/lib/types";
 import { Code2, ExternalLink, ChevronDown } from "lucide-react";
 import { usePreferredLanguage, buildSkillAccentMap } from "@/components";
 import Markdown from "@/components/utils/Markdown";
@@ -84,7 +85,7 @@ export default function ProjectsPage() {
                                 onClick={() => toggle(idx)}
                                 onKeyDown={(e) => onHeaderKey(idx, e)}
                                 className="flex items-start justify-between gap-3 pr-10 cursor-pointer select-none group"
-                                title={isOpen ? tr(UI.ui.collapse, lang) : tr(UI.ui.expand, lang)}
+                                title={isOpen ? tr(UI.actions.collapse, lang) : tr(UI.actions.expand, lang)}
                             >
                                 <LinkWrap>
                                     <BrandLogo src={p.logo} label={title} />

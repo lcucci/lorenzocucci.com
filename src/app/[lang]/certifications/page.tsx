@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import SiteShell from "@/components/layout/SiteShell";
 import { SectionTitle, BrandLogo, usePreferredLanguage, buildSkillAccentMap } from "@/components";
-import { SITE, CERTIFICATIONS, tr, UI } from "@/lib/content";
+import { SITE, CERTIFICATIONS, UI } from "@/lib/content";
+import { tr } from "@/lib/types";
 import { Award, ExternalLink, ChevronDown } from "lucide-react";
 import Markdown from "@/components/utils/Markdown";
 
@@ -84,7 +85,7 @@ export default function CertificationsPage() {
                                 onClick={() => toggle(idx)}
                                 onKeyDown={(e) => onHeaderKey(idx, e)}
                                 className="flex items-start justify-between gap-3 pr-10 cursor-pointer select-none group"
-                                title={isOpen ? tr(UI.ui.collapse, lang) : tr(UI.ui.expand, lang)}
+                                title={isOpen ? tr(UI.actions.collapse, lang) : tr(UI.actions.expand, lang)}
                             >
                                 <LinkWrap>
                                     <BrandLogo src={c.logo} label={name} />

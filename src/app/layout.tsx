@@ -1,6 +1,6 @@
 import "./globals.css";
 import { cookies } from "next/headers";
-import type { Lang } from "@/lib/content";
+import type { Lang } from "@/lib/types";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     const cookieStore = await cookies();

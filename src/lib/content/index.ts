@@ -1,4 +1,3 @@
-export * from "./types";
 export { UI } from "./ui";
 export { SITE } from "./site";
 export { SEO } from "./seo";
