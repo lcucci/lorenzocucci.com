@@ -54,6 +54,10 @@ export const UI = {
         } as MLString,
     },
     social: {
+        email: {
+            en: "Email",
+            it: "Email"
+        } as MLString,
         github: {
             en: "GitHub",
             it: "GitHub"
