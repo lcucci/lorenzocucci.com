@@ -36,8 +36,6 @@ export default function ExperiencePage() {
                     const company = tr(exp.company, lang);
                     const role = tr(exp.role, lang);
                     const location = tr(exp.location, lang);
-
-                    // New dates (assumed always present)
                     const startDate = tr((exp as any).startDate, lang);
                     const endDate = tr((exp as any).endDate, lang);
 
@@ -71,7 +69,6 @@ export default function ExperiencePage() {
                                 className="flex items-start justify-between gap-3 pr-10 cursor-pointer select-none group"
                                 title={isOpen ? tr(UI.actions.collapse, lang) : tr(UI.actions.expand, lang)}
                             >
-                                {/* Left: logo + 3-line title (role / company / location) */}
                                 <div className="flex items-center gap-3">
                                     <CompanyWrapper>
                                         <BrandLogo src={exp.companyLogo} label={company} />
@@ -87,7 +84,6 @@ export default function ExperiencePage() {
                                     </div>
                                 </div>
 
-                                {/* Right: two-line dates (startDate / endDate) */}
                                 <div className="flex flex-col items-end text-sm">
                                     <div>{startDate}</div>
                                     <div>{endDate}</div>

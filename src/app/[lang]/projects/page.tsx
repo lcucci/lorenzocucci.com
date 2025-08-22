@@ -13,7 +13,6 @@ export default function ProjectsPage() {
     const { lang } = usePreferredLanguage();
     const accentMap = React.useMemo(() => buildSkillAccentMap(lang as "it" | "en"), [lang]);
 
-    // All panels open by default
     const [open, setOpen] = useState<boolean[]>(() => PROJECTS.map(() => true));
 
     const toggle = (idx: number) =>
@@ -60,7 +59,6 @@ export default function ProjectsPage() {
 
                     return (
                         <div key={idx} className="relative card p-4">
-                            {/* Code link slightly left to not overlap chevron */}
                             {codeUrl ? (
                                 <a
                                     href={codeUrl}
@@ -76,7 +74,6 @@ export default function ProjectsPage() {
                                 </a>
                             ) : null}
 
-                            {/* Clickable header to toggle */}
                             <div
                                 role="button"
                                 tabIndex={0}
@@ -103,7 +100,6 @@ export default function ProjectsPage() {
                                 />
                             </div>
 
-                            {/* Collapsible body: description + skills */}
                             <div
                                 id={`proj-${idx}-content`}
                                 className={`mt-3 grid transition-all duration-300 ease-in-out ${

@@ -76,7 +76,6 @@ export default function CertificationsPage() {
                                 </a>
                             ) : null}
 
-                            {/* Clickable header to toggle */}
                             <div
                                 role="button"
                                 tabIndex={0}
@@ -105,7 +104,6 @@ export default function CertificationsPage() {
                                 />
                             </div>
 
-                            {/* Collapsible body */}
                             <div
                                 id={`cert-${idx}-content`}
                                 className={`mt-3 grid transition-all duration-300 ease-in-out ${

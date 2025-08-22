@@ -7,7 +7,7 @@ import { Github, Linkedin, Briefcase, Code2, Award } from "lucide-react";
 import SiteShell from "@/components/layout/SiteShell";
 import { SITE, UI, PROJECTS, CERTIFICATIONS, SKILLS } from "@/lib/content";
 import { tr } from "@/lib/types";
-import { Badge, usePreferredLanguage, useLocaleHref } from "@/components";
+import { usePreferredLanguage, useLocaleHref } from "@/components";
 import Markdown from "@/components/utils/Markdown";
 
 export default function HomePage() {
@@ -82,7 +82,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Skills */}
           <div className="card p-4">
             <div className="text-base font-bold mb-3">
               {tr(SITE.sections.skills, lang)}
