@@ -8,9 +8,6 @@ import { tr } from "@/lib/types";
 import { Award, ExternalLink, ChevronDown } from "lucide-react";
 import Markdown from "@/components/utils/Markdown";
 
-import { makeGenerateMetadata } from "@/lib/content/seo";
-export const generateMetadata = makeGenerateMetadata("certifications");
-
 export default function CertificationsPage() {
     const { lang } = usePreferredLanguage();
     const accentMap = React.useMemo(() => buildSkillAccentMap(lang as "it" | "en"), [lang]);

@@ -1,178 +1,175 @@
 import type { Metadata } from "next";
-import { SITE } from "@/lib/content/site";
-import type { MLString, Lang } from "@/lib/types";
 
-type PageSeo = {
-    title: MLString;
-    description: MLString;
-    keywords?: Record<Lang, string[]>;
+export type Lang = "it" | "en";
+export type PageKey = "home" | "projects" | "experience" | "certifications";
+
+type BuildOpts = {
+    noindex?: boolean;
+    image?: string;
+    lastModified?: string; // ISO string if you want to surface freshness in OG
 };
 
-export type PageKey = "home" | "experience" | "projects" | "certifications";
+const SITE_URL = "https://lorenzocucci.com";
+const DEFAULT_LANG: Lang = "it";
+const DEFAULT_OG = `${SITE_URL}/og/cover.jpg`; // 1200x630 recommended
 
-/** Route segment (after /[lang]) for each page */
-const PAGE_SLUG: Record<PageKey, string> = {
-    home: "",
-    experience: "/experience",
-    projects: "/projects",
-    certifications: "/certifications",
-};
-
-/** Default public base URL used to build canonicals and alternates. */
-const DEFAULT_BASE_URL = "https://lorenzocucci.com";
-
-/** Language to locale mapping for OG metadata */
-const OG_LOCALE: Record<Lang, string> = {
+const LOCALES: Record<Lang, string> = {
     it: "it_IT",
     en: "en_US",
 };
 
-export const SEO: Record<PageKey, PageSeo> = {
+const PAGE_SLUGS: Record<PageKey, Record<Lang, string>> = {
+    home: { it: "/it", en: "/en" },
+    projects: { it: "/it/projects", en: "/en/projects" },
+    experience: { it: "/it/experience", en: "/en/experience" },
+    certifications: { it: "/it/certifications", en: "/en/certifications" },
+};
+
+const TITLES: Record<PageKey, Record<Lang, string>> = {
     home: {
-        title: { en: "Lorenzo Cucci - Portfolio", it: "Lorenzo Cucci - Portfolio" },
-        description: {
-            en: "Backend Developer • Data Analyst. Portfolio with projects, experience and certifications.",
-            it: "Sviluppatore Backend • Data Analyst. Portfolio con progetti, esperienza e certificazioni.",
-        },
-        keywords: {
-            en: ["Lorenzo Cucci", "Portfolio", "Backend Developer", "Data Analyst", "Java", "SQL"],
-            it: ["Lorenzo Cucci", "Portfolio", "Sviluppatore Backend", "Data Analyst", "Java", "SQL"],
-        },
-    },
-    experience: {
-        title: { en: "Experience | Lorenzo Cucci", it: "Esperienza | Lorenzo Cucci" },
-        description: {
-            en: "Professional experience, roles and responsibilities, notable projects and impact.",
-            it: "Esperienze professionali, ruoli e responsabilità, progetti svolti e risultati.",
-        },
-        keywords: {
-            en: ["Experience", "Backend", "Java", "Spring", "SQL", "APIs"],
-            it: ["Esperienza", "Backend", "Java", "Spring", "SQL", "API"],
-        },
+        it: "Lorenzo Cucci - Sviluppatore Backend & Data Analyst",
+        en: "Lorenzo Cucci - Backend Developer & Data Analyst",
     },
     projects: {
-        title: { en: "Projects | Lorenzo Cucci", it: "Progetti | Lorenzo Cucci" },
-        description: {
-            en: "Personal and open-source projects with code, stack and learnings.",
-            it: "Progetti personali e open-source con codice, stack e lezioni apprese.",
-        },
-        keywords: {
-            en: ["Projects", "Open Source", "GitHub", "TrovaBenzinaBot", "Python", "PostgreSQL"],
-            it: ["Progetti", "Open Source", "GitHub", "TrovaBenzinaBot", "Python", "PostgreSQL"],
-        },
+        it: "Progetti | Lorenzo Cucci",
+        en: "Projects | Lorenzo Cucci",
+    },
+    experience: {
+        it: "Esperienza | Lorenzo Cucci",
+        en: "Experience | Lorenzo Cucci",
     },
     certifications: {
-        title: { en: "Certifications | Lorenzo Cucci", it: "Certificazioni | Lorenzo Cucci" },
-        description: {
-            en: "Professional certifications and credentials.",
-            it: "Certificazioni professionali e credenziali.",
-        },
-        keywords: {
-            en: ["Certifications", "Cloud", "Developer", "Google Cloud", "Cloud Digital Leader"],
-            it: ["Certificazioni", "Cloud", "Developer", "Google Cloud", "Cloud Digital Leader"],
-        },
+        it: "Certificazioni | Lorenzo Cucci",
+        en: "Certifications | Lorenzo Cucci",
     },
 };
 
-/** Returns the localized title/description/keywords for the given page. */
-export const getSeo = (page: PageKey, lang: Lang) => {
-    const s = SEO[page];
+const DESCRIPTIONS: Record<PageKey, Record<Lang, string>> = {
+    home: {
+        it: "Sviluppatore backend e data analyst a Milano, Italia. Portfolio con progetti, esperienza e certificazioni.",
+        en: "Backend developer and data analyst based in Milan, Italy. Portfolio with projects, experience and certifications.",
+    },
+    projects: {
+        it: "Progetti personali e open-source con codice, stack e lezioni apprese.",
+        en: "Personal and open-source projects with code, stack and learnings.",
+    },
+    experience: {
+        it: "Esperienze professionali, ruoli e responsabilità, progetti svolti e risultati.",
+        en: "Professional experience, roles and responsibilities, notable projects and impact.",
+    },
+    certifications: {
+        it: "Certificazioni professionali e credenziali.",
+        en: "Professional certifications and credentials.",
+    },
+};
+
+const KEYWORDS: Record<PageKey, Record<Lang, string[]>> = {
+    home: {
+        it: ["Lorenzo Cucci", "portfolio", "sviluppatore", "backend", "portfolio sviluppatore", "sviluppatore backend", "data analyst", "Milano", "Italia"],
+        en: ["Lorenzo Cucci", "portfolio", "developer", "backend", "developer portfolio", "backend developer", "data analyst", "Milan", "Italy"],
+    },
+    projects: {
+        it: ["progetti Lorenzo Cucci", "progetti", "open source", "GitHub", "TrovaBenzinaBot", "Trova Benzina", "MoneyIsTime"],
+        en: ["Lorenzo Cucci projects", "projects", "open source", "GitHub", "TrovaBenzinaBot", "Trova Benzina", "MoneyIsTime"],
+    },
+    experience: {
+        it: ["esperienza Lorenzo Cucci", "esperienza", "sviluppo backend", "analisi dati", "consulenza informatica", "Sopra Steria", "Assago", "GFT", "Milano", "Italia", "Java", "SQL"],
+        en: ["Lorenzo Cucci experience", "experience", "backend engineering", "data analytics", "IT consulting", "Sopra Steria", "Assago", "GFT", "Milan", "Italy", "Java", "SQL"],
+    },
+    certifications: {
+        it: ["certificazioni Lorenzo Cucci", "certificazioni", "Google Cloud", "Cloud Digital Leader"],
+        en: ["Lorenzo Cucci certifications", "certifications", "Google Cloud", "Cloud Digital Leader"],
+    },
+};
+
+function ensureLang(lang?: Lang): Lang {
+    return (lang === "it" || lang === "en") ? lang : DEFAULT_LANG;
+}
+
+function canonicalOf(page: PageKey, lang: Lang): string {
+    return `${SITE_URL}${PAGE_SLUGS[page][lang]}`;
+}
+
+function languageAlternatesOf(page: PageKey): Record<string, string> {
     return {
-        title: s.title[lang],
-        description: s.description[lang],
-        keywords: s.keywords?.[lang] ?? [],
+        it: `${SITE_URL}${PAGE_SLUGS[page].it}`,
+        en: `${SITE_URL}${PAGE_SLUGS[page].en}`,
+        "x-default": `${SITE_URL}${PAGE_SLUGS[page].it}`,
     };
-};
+}
 
-/** Builds the per-page path like /it/projects or /en. */
-export const getPagePath = (page: PageKey, lang: Lang): string => {
-    const slug = PAGE_SLUG[page];
-    return `/${lang}${slug}`;
-};
-
-/** Full absolute URL for a page, using the provided baseUrl or a sensible default. */
-export const getPageUrl = (
+export function buildMetadata(
     page: PageKey,
-    lang: Lang,
-    baseUrl: string = DEFAULT_BASE_URL,
-): string => {
-    const path = getPagePath(page, lang);
-    return `${baseUrl.replace(/\/$/, "")}${path}`;
-};
-
-/** Builds <link rel="alternate" hreflang="..."> URLs for both languages. */
-export const getLanguageAlternates = (
-    page: PageKey,
-    baseUrl: string = DEFAULT_BASE_URL,
-): Record<string, string> => ({
-    it: getPageUrl(page, "it", baseUrl),
-    en: getPageUrl(page, "en", baseUrl),
-});
-
-/**
- * Build Next.js Metadata for a given page and language.
- * Use in route files with generateMetadata or export const metadata.
- */
-export const buildMetadata = (
-    page: PageKey,
-    lang: Lang,
-    opts?: {
-        baseUrl?: string;
-        index?: boolean;
-    },
-): Metadata => {
-    const baseUrl = (opts?.baseUrl || DEFAULT_BASE_URL).replace(/\/$/, "");
-    const { title, description, keywords } = getSeo(page, lang);
-    const url = getPageUrl(page, lang, baseUrl);
-    const alternates = getLanguageAlternates(page, baseUrl);
+    langInput?: Lang,
+    opts?: BuildOpts
+): Metadata {
+    const lang = ensureLang(langInput);
+    const title = TITLES[page][lang];
+    const description = DESCRIPTIONS[page][lang];
+    const image = opts?.image ?? DEFAULT_OG;
+    const canonical = canonicalOf(page, lang);
 
     return {
-        metadataBase: new URL(baseUrl),
+        metadataBase: new URL(SITE_URL),
         title,
         description,
-        applicationName: SITE.title.en,
-        authors: [{ name: SITE.title.en, url: baseUrl }],
-        creator: SITE.title.en,
-        publisher: SITE.title.en,
-        keywords,
-        robots: {
-            index: opts?.index ?? true,
-            follow: true,
-            googleBot: {
-                index: opts?.index ?? true,
-                follow: true,
-            },
-        },
+        applicationName: "Lorenzo Cucci",
+        authors: [{ name: "Lorenzo Cucci", url: SITE_URL }],
+        keywords: KEYWORDS[page][lang],
         alternates: {
-            canonical: url,
-            languages: alternates,
+            canonical,
+            languages: languageAlternatesOf(page),
+        },
+        robots: {
+            index: !opts?.noindex,
+            follow: true,
+            "max-snippet": -1,
+            "max-image-preview": "large",
+            "max-video-preview": -1,
         },
         openGraph: {
             type: "website",
+            locale: LOCALES[lang],
+            siteName: "Lorenzo Cucci",
             title,
             description,
-            url,
-            siteName: SITE.title.en,
-            locale: OG_LOCALE[lang],
-            alternateLocale: Object.values(OG_LOCALE).filter((l) => l !== OG_LOCALE[lang]),
+            url: canonical,
+            images: [
+                {
+                    url: image,
+                    width: 1200,
+                    height: 630,
+                    alt: title,
+                },
+            ],
         },
         twitter: {
-            card: "summary",
+            card: "summary_large_image",
             title,
             description,
-            site: "@lorenzocucci02",
+            images: [image],
         },
         icons: {
-            icon: "/favicon.ico",
+            icon: [
+                { url: "/favicon.ico" },
+                { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+                { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+            ],
+            apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+            shortcut: ["/favicon.ico"],
+        },
+        referrer: "strict-origin-when-cross-origin",
+        themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }, { media: "(prefers-color-scheme: dark)", color: "#0b0b0b" }],
+        other: {
+            // Keep lean. Add verification tags here if needed.
+            "color-scheme": "light dark",
         },
     };
-};
+}
 
-/** Helper to plug directly into route files: export const generateMetadata = makeGenerateMetadata("home") */
-export const makeGenerateMetadata = (
-    page: PageKey,
-    opts?: { baseUrl?: string; index?: boolean },
-) => {
-    return ({ params }: { params: { lang?: Lang } }): Metadata =>
-        buildMetadata(page, (params?.lang as Lang) || "it", opts);
-};
+/**
+ * Helper to expose canonical URL in components if needed.
+ */
+export function getCanonicalUrl(page: PageKey, lang?: Lang): string {
+    return canonicalOf(page, ensureLang(lang));
+}

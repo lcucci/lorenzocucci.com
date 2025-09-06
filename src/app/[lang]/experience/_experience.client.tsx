@@ -9,9 +9,6 @@ import { Briefcase, ChevronDown } from "lucide-react";
 import { usePreferredLanguage, buildSkillAccentMap } from "@/components";
 import Markdown from "@/components/utils/Markdown";
 
-import { makeGenerateMetadata } from "@/lib/content/seo";
-export const generateMetadata = makeGenerateMetadata("experience");
-
 export default function ExperiencePage() {
     const { lang } = usePreferredLanguage();
     const [open, setOpen] = useState<boolean[]>(() => EXPERIENCES.map((_, i) => i === 0));
