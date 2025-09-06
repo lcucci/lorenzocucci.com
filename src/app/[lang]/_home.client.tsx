@@ -10,9 +10,6 @@ import { tr } from "@/lib/types";
 import { usePreferredLanguage, useLocaleHref } from "@/components";
 import Markdown from "@/components/utils/Markdown";
 
-import { makeGenerateMetadata } from "@/lib/content/seo";
-export const generateMetadata = makeGenerateMetadata("home");
-
 export default function HomePage() {
     const { lang } = usePreferredLanguage();
     const href = useLocaleHref();

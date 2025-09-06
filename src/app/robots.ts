@@ -11,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
             },
         ],
         sitemap: `${base}/sitemap.xml`,
-        host: "lorenzocucci.com",
+        host: `${base}`,
     };
 }

@@ -9,9 +9,6 @@ import { Code2, ExternalLink, ChevronDown } from "lucide-react";
 import { usePreferredLanguage, buildSkillAccentMap } from "@/components";
 import Markdown from "@/components/utils/Markdown";
 
-import { makeGenerateMetadata } from "@/lib/content/seo";
-export const generateMetadata = makeGenerateMetadata("projects");
-
 export default function ProjectsPage() {
     const { lang } = usePreferredLanguage();
     const accentMap = React.useMemo(() => buildSkillAccentMap(lang as "it" | "en"), [lang]);

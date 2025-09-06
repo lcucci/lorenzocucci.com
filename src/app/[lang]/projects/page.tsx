@@ -3,6 +3,7 @@ import type { Lang } from "@/lib/types";
 import ProjectsPageClient from "./_projects.client";
 import { buildMetadata } from "@/lib/content/seo";
 
+
 export async function generateMetadata(
     { params }: { params: Promise<{ lang?: Lang }> }
 ): Promise<Metadata> {
