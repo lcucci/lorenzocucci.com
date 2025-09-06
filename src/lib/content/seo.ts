@@ -6,12 +6,12 @@ export type PageKey = "home" | "projects" | "experience" | "certifications";
 type BuildOpts = {
     noindex?: boolean;
     image?: string;
-    lastModified?: string; // ISO string if you want to surface freshness in OG
+    lastModified?: string;
 };
 
 const SITE_URL = "https://lorenzocucci.com";
 const DEFAULT_LANG: Lang = "it";
-const DEFAULT_OG = `${SITE_URL}/og/cover.jpg`; // 1200x630 recommended
+const DEFAULT_OG = `${SITE_URL}/og/cover.jpg`;
 
 const LOCALES: Record<Lang, string> = {
     it: "it_IT",
@@ -161,7 +161,6 @@ export function buildMetadata(
         referrer: "strict-origin-when-cross-origin",
         themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }, { media: "(prefers-color-scheme: dark)", color: "#0b0b0b" }],
         other: {
-            // Keep lean. Add verification tags here if needed.
             "color-scheme": "light dark",
         },
     };
