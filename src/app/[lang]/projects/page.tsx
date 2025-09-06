@@ -5,9 +5,10 @@ import { buildMetadata } from "@/lib/content/seo";
 
 
 export async function generateMetadata(
-    { params }: { params: { lang?: Lang } }
+    { params }: { params: Promise<{ lang?: Lang }> }
 ): Promise<Metadata> {
-    const effectiveLang: Lang = (params.lang as Lang) || "it";
+    const { lang } = await params;
+    const effectiveLang: Lang = (lang as Lang) || "it";
     return buildMetadata("projects", effectiveLang);
 }
 
