@@ -1,8 +1,17 @@
 import "./globals.css";
 import { cookies } from "next/headers";
+import type { Metadata, Viewport } from "next";
 import type { Lang } from "@/lib/types";
 import JsonLd from "@/components/layout/JsonLd";
 import { personJsonLd, websiteJsonLd } from "@/components";
+
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+        { media: "(prefers-color-scheme: dark)", color: "#0b0b0b" },
+    ],
+    colorScheme: "light dark",
+};
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     const cookieStore = await cookies();

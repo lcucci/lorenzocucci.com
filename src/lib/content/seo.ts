@@ -159,10 +159,6 @@ export function buildMetadata(
             shortcut: ["/favicon.ico"],
         },
         referrer: "strict-origin-when-cross-origin",
-        themeColor: [{ media: "(prefers-color-scheme: light)", color: "#ffffff" }, { media: "(prefers-color-scheme: dark)", color: "#0b0b0b" }],
-        other: {
-            "color-scheme": "light dark",
-        },
     };
 }
 
